@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Objects/Cube.cs" id="1_prqop"]
 [ext_resource type="Texture2D" uid="uid://dy1wiull4phow" path="res://Icons/arrow.svg" id="3_a41k2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bp452"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d0ku0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_utiao"]
 
 [node name="Cube" type="MeshInstance3D"]
-material_override = SubResource("StandardMaterial3D_bp452")
+material_override = SubResource("StandardMaterial3D_d0ku0")
 mesh = SubResource("BoxMesh_utiao")
 skeleton = NodePath("")
 script = ExtResource("1_prqop")

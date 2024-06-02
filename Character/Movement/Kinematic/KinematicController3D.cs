@@ -1,7 +1,8 @@
 using Godot;
 using Godot.Collections;
+using Legion.Character.Movement.Steering;
 
-namespace Legion.Character.Movement;
+namespace Legion.Character.Movement.Kinematic;
 
 [Tool]
 [GlobalClass, Icon("res://Icons/kinematics.svg")]

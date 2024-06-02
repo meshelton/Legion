@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Legion.Character.Movement;
+namespace Legion.Character.Movement.Kinematic;
 
 [Tool]
 public abstract partial class KinematicMovement3D : Node
