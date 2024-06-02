@@ -35,7 +35,7 @@ public partial class KinematicArrive3D : KinematicMovement3D
         }
 
         // Face the direction we want to move;
-        Character.LookAt(result.Velocity);
+        Character.LookAt(result.Velocity, useModelFront: true);
         result.Rotation = 0;
         return result;
     }

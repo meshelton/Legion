@@ -42,7 +42,11 @@ public partial class KinematicController3D : Node
         }
         
         GetParent<Node3D>().Position = _position;
-        GetParent<Node3D>().Rotate(Vector3.Up, _rotation);
+        if (_rotation != 0)
+        {
+            GetParent<Node3D>().Rotate(Vector3.Up, _rotation);    
+        }
+        
     }
 
     private void Update(SteeringOutput3D steering, float time)

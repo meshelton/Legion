@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnun8w7kqllww"
-path.s3tc="res://.godot/imported/seek.svg-ebf57b3c7410382f0cdc51f387becca8.s3tc.ctex"
+uid="uid://dy1wiull4phow"
+path.s3tc="res://.godot/imported/arrow.svg-6b5503591a567ad0f1c591a1e63c08aa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Icons/seek.svg"
-dest_files=["res://.godot/imported/seek.svg-ebf57b3c7410382f0cdc51f387becca8.s3tc.ctex"]
+source_file="res://Icons/arrow.svg"
+dest_files=["res://.godot/imported/arrow.svg-6b5503591a567ad0f1c591a1e63c08aa.s3tc.ctex"]
 
 [params]
 

@@ -20,7 +20,7 @@ public partial class KinematicSeek3D : KinematicMovement3D
         result.Velocity = directionToTarget * MaxSpeed;
         
         // Face where we want to move
-        Character.LookAt(directionToTarget);
+        Character.LookAt(directionToTarget, useModelFront: true);
         result.Rotation = 0;
         return result;
     }
