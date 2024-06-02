@@ -1,12 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1q4asf1r602m"]
+[gd_scene load_steps=12 format=3 uid="uid://b1q4asf1r602m"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_wejef"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicController3D.cs" id="2_udj33"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicSeek3D.cs" id="3_ctax2"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicFlee3D.cs" id="4_6m12x"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="4_yuagl"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_q2cal"]
+[ext_resource type="Script" path="res://Character/Movement/KinematicArrive3D.cs" id="5_76p3k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_xn3vy"]
 
@@ -16,20 +15,19 @@ albedo_color = Color(0.968627, 0, 0.0705882, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gujqj"]
 albedo_color = Color(0.847059, 0.792157, 0.0392157, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5g65t"]
+albedo_color = Color(0, 0.498039, 0.14902, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wvnf"]
 albedo_color = Color(0.184314, 0.431373, 0.878431, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_wejef")
 
-[node name="Seek" type="CharacterBody3D" parent="."]
-transform = Transform3D(0.6186, 0, 0.785706, 0, 1, 0, -0.785706, 0, 0.6186, -2.78444, 0, 5.72813)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Seek"]
-shape = SubResource("BoxShape3D_q2cal")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Seek"]
+[node name="Seek" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 mesh = SubResource("BoxMesh_xn3vy")
+skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_70vb2")
 
 [node name="KinematicController3D" type="Node" parent="Seek"]
@@ -40,15 +38,10 @@ script = ExtResource("3_ctax2")
 Target = NodePath("../../../Target")
 MaxSpeed = 5.0
 
-[node name="Flee" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54976, 0, 2.15415)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Flee"]
-shape = SubResource("BoxShape3D_q2cal")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Flee"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+[node name="Flee" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 mesh = SubResource("BoxMesh_xn3vy")
+skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_gujqj")
 
 [node name="KinematicController3D" type="Node" parent="Flee"]
@@ -58,6 +51,22 @@ script = ExtResource("2_udj33")
 script = ExtResource("4_6m12x")
 Target = NodePath("../../../Target")
 MaxSpeed = 5.0
+
+[node name="Arrive" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+mesh = SubResource("BoxMesh_xn3vy")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_5g65t")
+
+[node name="KinematicController3D" type="Node" parent="Arrive"]
+script = ExtResource("2_udj33")
+
+[node name="KinematicArrive3D" type="Node" parent="Arrive/KinematicController3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("5_76p3k")
+Target = NodePath("../../../Target")
+MaxSpeed = 5.0
+ArrivalRadius = 0.2
+TimeToTarget = 0.2
 
 [node name="Target" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_xn3vy")
