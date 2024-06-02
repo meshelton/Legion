@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1q4asf1r602m"]
+[gd_scene load_steps=11 format=3 uid="uid://b1q4asf1r602m"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_wejef"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicController3D.cs" id="2_udj33"]
@@ -10,18 +10,27 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_xn3vy"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70vb2"]
+albedo_color = Color(0.968627, 0, 0.0705882, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gujqj"]
+albedo_color = Color(0.847059, 0.792157, 0.0392157, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wvnf"]
+albedo_color = Color(0.184314, 0.431373, 0.878431, 1)
+
 [node name="Main" type="Node3D"]
 script = ExtResource("1_wejef")
 
 [node name="Seek" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.78444, 0, 2.69338)
+transform = Transform3D(0.6186, 0, 0.785706, 0, 1, 0, -0.785706, 0, 0.6186, -2.78444, 0, 5.72813)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Seek"]
 shape = SubResource("BoxShape3D_q2cal")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Seek"]
-transform = Transform3D(-0.196562, 0, 0.980491, 0, 1, 0, -0.980491, 0, -0.196562, 0, 0, 0)
 mesh = SubResource("BoxMesh_xn3vy")
+surface_material_override/0 = SubResource("StandardMaterial3D_70vb2")
 
 [node name="KinematicController3D" type="Node" parent="Seek"]
 script = ExtResource("2_udj33")
@@ -32,14 +41,15 @@ Target = NodePath("../../../Target")
 MaxSpeed = 5.0
 
 [node name="Flee" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.10689, 0, 2.69338)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54976, 0, 2.15415)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Flee"]
 shape = SubResource("BoxShape3D_q2cal")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Flee"]
-transform = Transform3D(-0.196562, 0, 0.980491, 0, 1, 0, -0.980491, 0, -0.196562, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("BoxMesh_xn3vy")
+surface_material_override/0 = SubResource("StandardMaterial3D_gujqj")
 
 [node name="KinematicController3D" type="Node" parent="Flee"]
 script = ExtResource("2_udj33")
@@ -50,11 +60,11 @@ Target = NodePath("../../../Target")
 MaxSpeed = 5.0
 
 [node name="Target" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.31826)
 mesh = SubResource("BoxMesh_xn3vy")
+surface_material_override/0 = SubResource("StandardMaterial3D_2wvnf")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.794552, -0.275038, 0.541332, 0, 0.891529, 0.452964, -0.607196, -0.359903, 0.708366, 7.02521, 5.16199, 8.45509)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_yuagl")
