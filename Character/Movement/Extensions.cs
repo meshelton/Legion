@@ -10,6 +10,16 @@ public static class Extensions
     {
         return node.Transform.Basis.Z.AngleTo(Vector3.Forward);
     }
+
+    public static Vector3 OrientationVector(this Node3D node)
+    {
+        return node.Transform.Basis.Z;
+    }
+
+    public static float RandBinom(this RandomNumberGenerator rng)
+    {
+        return rng.Randf() - rng.Randf();
+    }
     
     public static Array<T> GetChildrenOfType<[MustBeVariant] T>(this Node parent)
         where T : Node

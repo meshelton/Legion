@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1q4asf1r602m"]
+[gd_scene load_steps=14 format=3 uid="uid://b1q4asf1r602m"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_wejef"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicController3D.cs" id="2_udj33"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicSeek3D.cs" id="3_ctax2"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicFlee3D.cs" id="4_6m12x"]
+[ext_resource type="Script" path="res://Character/Movement/KinematicWander.cs" id="4_cvt58"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="4_yuagl"]
 [ext_resource type="Script" path="res://Character/Movement/KinematicArrive3D.cs" id="5_76p3k"]
 
@@ -11,6 +12,9 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70vb2"]
 albedo_color = Color(0.968627, 0, 0.0705882, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0m2un"]
+albedo_color = Color(0.768627, 0, 0.756863, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gujqj"]
 albedo_color = Color(0.847059, 0.792157, 0.0392157, 1)
@@ -25,7 +29,7 @@ albedo_color = Color(0.184314, 0.431373, 0.878431, 1)
 script = ExtResource("1_wejef")
 
 [node name="Seek" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
 mesh = SubResource("BoxMesh_xn3vy")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_70vb2")
@@ -37,6 +41,20 @@ script = ExtResource("2_udj33")
 script = ExtResource("3_ctax2")
 Target = NodePath("../../../Target")
 MaxSpeed = 5.0
+
+[node name="Wander" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+mesh = SubResource("BoxMesh_xn3vy")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_0m2un")
+
+[node name="KinematicController3D" type="Node" parent="Wander"]
+script = ExtResource("2_udj33")
+
+[node name="KinematicWander" type="Node" parent="Wander/KinematicController3D"]
+script = ExtResource("4_cvt58")
+MaxSpeed = 2.0
+MaxRotation = 0.8
 
 [node name="Flee" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
@@ -53,7 +71,7 @@ Target = NodePath("../../../Target")
 MaxSpeed = 5.0
 
 [node name="Arrive" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -5)
 mesh = SubResource("BoxMesh_xn3vy")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_5g65t")

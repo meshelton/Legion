@@ -14,20 +14,28 @@ public partial class KinematicArrive3D : KinematicMovement3D
     public override KinematicSteeringOutput3D GetSteering()
     {
         KinematicSteeringOutput3D result = new();
-        // Get the vector to target
-        Vector3 vectorToTarget = Target.Position - Character.Position;
-        if (vectorToTarget.Length() < ArrivalRadius)
+        
+        // Get the direction to the target
+        result.Velocity = Target.Position - Character.Position;
+        
+        // Check if already within radius from target
+        if (result.Velocity.Length() < ArrivalRadius)
         {
+            // This might be better as null...
             return result;
         }
-        Vector3 desiredVelocity = vectorToTarget / TimeToTarget;
-        if (desiredVelocity.Length() > MaxSpeed)
+        
+        // Would like to get to the target in TimeToTargetSeconds
+        result.Velocity /= TimeToTarget;
+        
+        // If it's too fast, clip to max speed
+        if (result.Velocity.Length() > MaxSpeed)
         {
-            desiredVelocity = desiredVelocity.Normalized() * MaxSpeed;
+            result.Velocity = result.Velocity.Normalized() * MaxSpeed;
         }
 
-        result.Velocity = desiredVelocity;
-        Character.LookAt(desiredVelocity);
+        // Face the direction we want to move;
+        Character.LookAt(result.Velocity);
         result.Rotation = 0;
         return result;
     }

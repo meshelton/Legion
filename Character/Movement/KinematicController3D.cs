@@ -23,6 +23,7 @@ public partial class KinematicController3D : Node
         }
 
         _position = GetParent<Node3D>().Position;
+        _orientation = GetParent<Node3D>().Orientation();
     }
 
     public override void _Process(double delta)
@@ -41,6 +42,7 @@ public partial class KinematicController3D : Node
         }
         
         GetParent<Node3D>().Position = _position;
+        GetParent<Node3D>().Rotate(Vector3.Up, _rotation);
     }
 
     private void Update(SteeringOutput3D steering, float time)
