@@ -10,6 +10,14 @@ public partial class SteeringController3D : Node
 {
     [Export] public float MaxSpeed = 10;
     
+    public Vector3 Position => _position;
+
+    public float Orientation => _orientation;
+
+    public Vector3 Velocity => _velocity;
+
+    public float Rotation => _rotation;    
+    
     private Vector3 _position;
     private float _orientation;
     private Vector3 _velocity;

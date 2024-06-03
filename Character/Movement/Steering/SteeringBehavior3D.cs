@@ -6,7 +6,9 @@ namespace Legion.Character.Movement.Steering;
 [Tool]
 public abstract partial class SteeringBehavior3D : Node
 {
-    protected Node3D Character => GetParent<SteeringController3D>().Character;
+    protected Node3D Character => CharacterController.Character;
+
+    protected SteeringController3D CharacterController => GetParent<SteeringController3D>();
 
     public override void _Ready()
     {

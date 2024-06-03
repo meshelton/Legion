@@ -9,7 +9,7 @@ public partial class KinematicArrive3D : KinematicBehavior3D
     [Export] public Node3D Target;
     [Export] public float MaxSpeed;
     [Export] public float ArrivalRadius;
-    [Export] public float TimeToTarget;
+    [Export] public float TimeToTarget = 0.25f;
 
     public override KinematicSteeringOutput3D GetSteering()
     {

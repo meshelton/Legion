@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://nyoty47u0rr5"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_pu1sm"]
+[ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_aglm4"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="3_jpbql"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Seek.cs" id="4_g6nmo"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Arrive.cs" id="5_gku8g"]
+[ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="6_mib6l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmqsd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03esw"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6p8f"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_pu1sm")
+
+[node name="Target" parent="." instance=ExtResource("2_aglm4")]
+material_override = SubResource("StandardMaterial3D_xmqsd")
+
+[node name="Seek" parent="." instance=ExtResource("2_aglm4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 2.69039)
+material_override = SubResource("StandardMaterial3D_03esw")
+Color = Color(0, 0, 1, 1)
+
+[node name="SteeringController3D" type="Node" parent="Seek"]
+script = ExtResource("3_jpbql")
+
+[node name="Seek" type="Node" parent="Seek/SteeringController3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("4_g6nmo")
+Target = NodePath("../../../Target")
+MaxAcceleration = 2.0
+
+[node name="Arrive" parent="." instance=ExtResource("2_aglm4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37977, 0, -5.76593)
+material_override = SubResource("StandardMaterial3D_h6p8f")
+Color = Color(1, 0, 0, 1)
+
+[node name="SteeringController3D" type="Node" parent="Arrive"]
+script = ExtResource("3_jpbql")
+
+[node name="Arrive" type="Node" parent="Arrive/SteeringController3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("5_gku8g")
+Target = NodePath("../../../Target")
+MaxAcceleration = 10.0
+MaxSpeed = 15.0
+TargetRadius = 0.01
+SlowRadius = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("6_mib6l")
