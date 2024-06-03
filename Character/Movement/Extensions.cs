@@ -8,7 +8,8 @@ public static class Extensions
 
     public static float Orientation(this Node3D node)
     {
-        return node.Transform.Basis.Z.AngleTo(Vector3.Forward);
+
+        return node.Rotation.Y;
     }
 
     public static Vector3 OrientationVector(this Node3D node)

@@ -9,6 +9,7 @@ namespace Legion.Character.Movement.Steering;
 public partial class SteeringController3D : Node
 {
     [Export] public float MaxSpeed = 10;
+    [Export] public float MaxRotation = Mathf.Pi / 2;
     
     public Vector3 Position => _position;
 
@@ -20,6 +21,8 @@ public partial class SteeringController3D : Node
     
     private Vector3 _position;
     private float _orientation;
+    
+    
     private Vector3 _velocity;
     private float _rotation;
 
@@ -49,18 +52,15 @@ public partial class SteeringController3D : Node
         foreach (SteeringBehavior3D movement in movements)
         {
             var steering = movement.GetSteering();
-            Update(steering, MaxSpeed, (float) delta);
+            Update(steering, MaxSpeed, MaxRotation, (float) delta);
         }
         
-        GetParent<Node3D>().Position = _position;
-        if (_rotation != 0)
-        {
-            GetParent<Node3D>().Rotate(Vector3.Up, _rotation);    
-        }
-        
+        Character.Position = _position;
+        Character.Rotation = Vector3.Up * _orientation;
+    
     }
 
-    private void Update(SteeringOutput3D steering, float maxSpeed, float time)
+    private void Update(SteeringOutput3D steering, float maxSpeed, float maxRotation, float time)
     {
         _position += _velocity * time;
         _orientation += _rotation * time;
@@ -73,7 +73,11 @@ public partial class SteeringController3D : Node
             _velocity = _velocity.Normalized();
             _velocity *= maxSpeed;
         }
-            
+
+        if (_rotation > maxRotation)
+        {
+            _rotation = maxRotation;
+        }
     }
     
     private float NewOrientation(float current, Vector3 velocity)
