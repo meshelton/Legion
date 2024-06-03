@@ -1,0 +1,60 @@
+[gd_scene load_steps=11 format=3 uid="uid://co2bp4apibbd5"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_l6jmt"]
+[ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_npo4p"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="3_kdv65"]
+[ext_resource type="Script" path="res://Character/Movement/Kinematic/KinematicController3D.cs" id="3_rfpyk"]
+[ext_resource type="Script" path="res://Character/Movement/Kinematic/KinematicArrive3D.cs" id="4_nutcs"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Pursue.cs" id="5_ck2c0"]
+[ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_xouxr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c15di"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rarh"]
+albedo_color = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpi4m"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_l6jmt")
+
+[node name="Target" parent="." instance=ExtResource("2_npo4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3.45978)
+material_override = SubResource("StandardMaterial3D_c15di")
+
+[node name="Seek" parent="." instance=ExtResource("2_npo4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3.45978)
+material_override = SubResource("StandardMaterial3D_2rarh")
+Color = Color(0, 1, 0, 1)
+
+[node name="KinematicController3D" type="Node" parent="Seek"]
+script = ExtResource("3_rfpyk")
+
+[node name="KinematicArrive3D" type="Node" parent="Seek/KinematicController3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("4_nutcs")
+Target = NodePath("../../../Target")
+MaxSpeed = 3.0
+ArrivalRadius = 0.1
+
+[node name="Pursue" parent="." instance=ExtResource("2_npo4p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_gpi4m")
+Color = Color(1, 0, 0, 1)
+
+[node name="SteeringController3D" type="Node" parent="Pursue"]
+script = ExtResource("3_kdv65")
+
+[node name="Pursue" type="Node" parent="Pursue/SteeringController3D" node_paths=PackedStringArray("Target", "Target")]
+script = ExtResource("5_ck2c0")
+Target = NodePath("../../../Seek")
+MaxPrediction = 4.0
+Target = NodePath("../../../Seek")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+projection = 1
+size = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("8_xouxr")

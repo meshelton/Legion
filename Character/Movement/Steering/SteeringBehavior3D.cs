@@ -1,5 +1,4 @@
 using Godot;
-using Legion.Character.Movement.Kinematic;
 
 namespace Legion.Character.Movement.Steering;
 

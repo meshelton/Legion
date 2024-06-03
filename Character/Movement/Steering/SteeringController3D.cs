@@ -1,6 +1,5 @@
 using Godot;
 using Godot.Collections;
-using Legion.Character.Movement.Kinematic;
 
 namespace Legion.Character.Movement.Steering;
 
@@ -36,7 +35,7 @@ public partial class SteeringController3D : Node
             UpdateConfigurationWarnings();
         }
 
-        _position = GetParent<Node3D>().Position;
+        _position = GetParent<Node3D>().GlobalPosition;
         _orientation = GetParent<Node3D>().Orientation();
     }
 
@@ -55,7 +54,7 @@ public partial class SteeringController3D : Node
             Update(steering, MaxSpeed, MaxRotation, (float) delta);
         }
         
-        Character.Position = _position;
+        Character.GlobalPosition = _position;
         Character.Rotation = Vector3.Up * _orientation;
     
     }
