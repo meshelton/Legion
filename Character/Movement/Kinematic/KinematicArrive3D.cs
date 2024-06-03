@@ -4,7 +4,7 @@ namespace Legion.Character.Movement.Kinematic;
 
 [Tool]
 [GlobalClass, Icon("res://Icons/arrive.svg")]
-public partial class KinematicArrive3D : KinematicMovement3D
+public partial class KinematicArrive3D : KinematicBehavior3D
 {
     [Export] public Node3D Target;
     [Export] public float MaxSpeed;

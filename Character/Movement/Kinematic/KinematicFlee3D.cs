@@ -4,7 +4,7 @@ namespace Legion.Character.Movement.Kinematic;
 
 [Tool]
 [GlobalClass, Icon("res://Icons/flee.svg")]
-public partial class KinematicFlee3D : KinematicMovement3D
+public partial class KinematicFlee3D : KinematicBehavior3D
 {
     [Export] public Node3D Target;
     [Export] public float MaxSpeed;

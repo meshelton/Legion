@@ -4,7 +4,7 @@ namespace Legion.Character.Movement.Kinematic;
 
 [Tool]
 [GlobalClass, Icon("res://Icons/wander.svg")]
-public partial class KinematicWander : KinematicMovement3D
+public partial class KinematicWander : KinematicBehavior3D
 {
     [Export] public float MaxSpeed;
     [Export] public float MaxRotation;

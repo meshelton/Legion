@@ -4,7 +4,7 @@ namespace Legion.Character.Movement.Kinematic;
 
 [Tool]
 [GlobalClass, Icon("res://Icons/seek.svg")]
-public partial class KinematicSeek3D : KinematicMovement3D
+public partial class KinematicSeek3D : KinematicBehavior3D
 {
     [Export] public Node3D Target;
     [Export] public float MaxSpeed;

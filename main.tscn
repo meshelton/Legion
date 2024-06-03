@@ -9,29 +9,29 @@
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="4_yuagl"]
 [ext_resource type="Script" path="res://Character/Movement/Kinematic/KinematicArrive3D.cs" id="5_76p3k"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkgqh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d2sm3"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_206sl"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gidv8"]
 albedo_color = Color(0.815686, 0.0235294, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dy3rt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8uuev"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7opvv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kowv3"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ftp8h"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10rvf"]
 albedo_color = Color(0, 0, 1, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_wejef")
 
 [node name="Target" parent="." instance=ExtResource("2_pt1yb")]
-material_override = SubResource("StandardMaterial3D_nkgqh")
+material_override = SubResource("StandardMaterial3D_d2sm3")
 
 [node name="Seek" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
-material_override = SubResource("StandardMaterial3D_206sl")
+material_override = SubResource("StandardMaterial3D_gidv8")
 Color = Color(0.815686, 0.0235294, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Seek"]
@@ -44,37 +44,35 @@ MaxSpeed = 2.0
 
 [node name="Flee" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-material_override = SubResource("StandardMaterial3D_dy3rt")
+material_override = SubResource("StandardMaterial3D_8uuev")
 Color = Color(1, 1, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Flee"]
 script = ExtResource("2_udj33")
 
-[node name="KinematicFlee3D" type="Node" parent="Flee/KinematicController3D"]
+[node name="KinematicFlee3D" type="Node" parent="Flee/KinematicController3D" node_paths=PackedStringArray("Target")]
 script = ExtResource("4_6m12x")
+Target = NodePath("")
 MaxSpeed = 2.0
-Target = Object(MeshInstance3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"layers":1,"sorting_offset":0.0,"sorting_use_aabb_center":true,"material_override":SubResource("StandardMaterial3D_nkgqh"),"material_overlay":null,"transparency":0.0,"cast_shadow":1,"extra_cull_margin":0.0,"custom_aabb":AABB(0, 0, 0, 0, 0, 0),"lod_bias":1.0,"ignore_occlusion_culling":false,"gi_mode":1,"gi_lightmap_scale":0,"visibility_range_begin":0.0,"visibility_range_begin_margin":0.0,"visibility_range_end":0.0,"visibility_range_end_margin":0.0,"visibility_range_fade_mode":0,"mesh":null,"skin":null,"skeleton":NodePath(""),"surface_material_override/0":null,"script":Resource("res://Objects/Cube.cs"),"Color":Color(1, 1, 1, 1))
-
 
 [node name="Arive" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-material_override = SubResource("StandardMaterial3D_7opvv")
+material_override = SubResource("StandardMaterial3D_kowv3")
 Color = Color(0, 1, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Arive"]
 script = ExtResource("2_udj33")
 
-[node name="KinematicArrive3D" type="Node" parent="Arive/KinematicController3D"]
+[node name="KinematicArrive3D" type="Node" parent="Arive/KinematicController3D" node_paths=PackedStringArray("Target")]
 script = ExtResource("5_76p3k")
+Target = NodePath("")
 MaxSpeed = 2.0
 ArrivalRadius = 0.1
 TimeToTarget = 0.8
-Target = Object(MeshInstance3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"layers":1,"sorting_offset":0.0,"sorting_use_aabb_center":true,"material_override":SubResource("StandardMaterial3D_nkgqh"),"material_overlay":null,"transparency":0.0,"cast_shadow":1,"extra_cull_margin":0.0,"custom_aabb":AABB(0, 0, 0, 0, 0, 0),"lod_bias":1.0,"ignore_occlusion_culling":false,"gi_mode":1,"gi_lightmap_scale":0,"visibility_range_begin":0.0,"visibility_range_begin_margin":0.0,"visibility_range_end":0.0,"visibility_range_end_margin":0.0,"visibility_range_fade_mode":0,"mesh":null,"skin":null,"skeleton":NodePath(""),"surface_material_override/0":null,"script":Resource("res://Objects/Cube.cs"),"Color":Color(1, 1, 1, 1))
-
 
 [node name="Wander" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-material_override = SubResource("StandardMaterial3D_ftp8h")
+material_override = SubResource("StandardMaterial3D_10rvf")
 Color = Color(0, 0, 1, 1)
 
 [node name="KinematicController3D" type="Node" parent="Wander"]

@@ -3,7 +3,7 @@ using Godot;
 namespace Legion.Character.Movement.Kinematic;
 
 [Tool]
-public abstract partial class KinematicMovement3D : Node
+public abstract partial class KinematicBehavior3D : Node
 {
     protected Node3D Character => GetParent<KinematicController3D>().Character;
 

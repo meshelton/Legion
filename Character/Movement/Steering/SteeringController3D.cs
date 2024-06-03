@@ -1,13 +1,15 @@
 using Godot;
 using Godot.Collections;
-using Legion.Character.Movement.Steering;
+using Legion.Character.Movement.Kinematic;
 
-namespace Legion.Character.Movement.Kinematic;
+namespace Legion.Character.Movement.Steering;
 
 [Tool]
 [GlobalClass, Icon("res://Icons/kinematics.svg")]
-public partial class KinematicController3D : Node
+public partial class SteeringController3D : Node
 {
+    [Export] public float MaxSpeed = 10;
+    
     private Vector3 _position;
     private float _orientation;
     private Vector3 _velocity;
@@ -34,12 +36,12 @@ public partial class KinematicController3D : Node
             return;
         }
         
-        Array<KinematicBehavior3D> movements = this.GetChildrenOfType<KinematicBehavior3D>();
+        Array<SteeringBehavior3D> movements = this.GetChildrenOfType<SteeringBehavior3D>();
 
-        foreach (KinematicBehavior3D movement in movements)
+        foreach (SteeringBehavior3D movement in movements)
         {
             var steering = movement.GetSteering();
-            Update(steering, (float) delta);
+            Update(steering, MaxSpeed, (float) delta);
         }
         
         GetParent<Node3D>().Position = _position;
@@ -50,26 +52,22 @@ public partial class KinematicController3D : Node
         
     }
 
-    private void Update(SteeringOutput3D steering, float time)
+    private void Update(SteeringOutput3D steering, float maxSpeed, float time)
     {
-        float halfTSq = 0.5f * time * time;
-        _position += _velocity * time + steering.Linear * halfTSq;
-        _orientation += _rotation * time + steering.Angular * halfTSq;
+        _position += _velocity * time;
+        _orientation += _rotation * time;
 
         _velocity += steering.Linear * time;
         _rotation += steering.Angular * time;
+
+        if (_velocity.Length() > maxSpeed)
+        {
+            _velocity = _velocity.Normalized();
+            _velocity *= maxSpeed;
+        }
+            
     }
     
-    private void Update(KinematicSteeringOutput3D steering, float time)
-    {
-        _velocity = steering.Velocity;
-        _rotation = steering.Rotation;
-        _position += _velocity * time;
-        _orientation += _rotation * time;
-    }    
-    
-    
-
     private float NewOrientation(float current, Vector3 velocity)
     {
         if (velocity.Length() > 0)
