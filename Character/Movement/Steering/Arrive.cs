@@ -27,13 +27,12 @@ public partial class Arrive : SteeringBehavior3D
     [Export] public float TargetRadius;
     [Export] public float SlowRadius;
     [Export] public float TimeToTarget = 0.1f;
-    
 
-    public override void _Process(double delta)
+
+    public override void _Ready()
     {
-        _tracker.Update((float) delta);
+        AddChild(_tracker);
     }
-
 
     public override SteeringOutput3D GetSteering()
     {

@@ -9,29 +9,29 @@
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="4_yuagl"]
 [ext_resource type="Script" path="res://Character/Movement/Kinematic/KinematicArrive3D.cs" id="5_76p3k"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g0x6v"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oyp7d"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g4lth"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8215p"]
 albedo_color = Color(0.815686, 0.0235294, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfo30"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vvqia"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cr63s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q05bo"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3yeke"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arfvp"]
 albedo_color = Color(0, 0, 1, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_wejef")
 
 [node name="Target" parent="." instance=ExtResource("2_pt1yb")]
-material_override = SubResource("StandardMaterial3D_g0x6v")
+material_override = SubResource("StandardMaterial3D_oyp7d")
 
 [node name="Seek" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
-material_override = SubResource("StandardMaterial3D_g4lth")
+material_override = SubResource("StandardMaterial3D_8215p")
 Color = Color(0.815686, 0.0235294, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Seek"]
@@ -44,7 +44,7 @@ MaxSpeed = 2.0
 
 [node name="Flee" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
-material_override = SubResource("StandardMaterial3D_yfo30")
+material_override = SubResource("StandardMaterial3D_vvqia")
 Color = Color(1, 1, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Flee"]
@@ -57,7 +57,7 @@ MaxSpeed = 2.0
 
 [node name="Arive" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-material_override = SubResource("StandardMaterial3D_cr63s")
+material_override = SubResource("StandardMaterial3D_q05bo")
 Color = Color(0, 1, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Arive"]
@@ -72,7 +72,7 @@ TimeToTarget = 0.8
 
 [node name="Wander" parent="." instance=ExtResource("2_pt1yb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
-material_override = SubResource("StandardMaterial3D_3yeke")
+material_override = SubResource("StandardMaterial3D_arfvp")
 Color = Color(0, 0, 1, 1)
 
 [node name="KinematicController3D" type="Node" parent="Wander"]

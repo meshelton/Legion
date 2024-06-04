@@ -39,6 +39,8 @@ public partial class SteeringController3D : Node
         _orientation = GetParent<Node3D>().Orientation();
     }
 
+    
+    // TODO: Lack of drag force causes various steering behaviors to oscillate forever 
     public override void _Process(double delta)
     {
         if (Engine.IsEditorHint())

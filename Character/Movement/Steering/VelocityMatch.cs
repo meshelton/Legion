@@ -24,12 +24,11 @@ public partial class VelocityMatch : SteeringBehavior3D
     [Export] public float MaxAcceleration;
     [Export] public float TimeToTarget = 0.1f;
 
-    public override void _Process(double delta)
+    public override void _Ready()
     {
-        _tracker.Update((float) delta);
+        AddChild(_tracker);
     }
-
-
+    
     public override SteeringOutput3D GetSteering()
     {
         SteeringOutput3D result = new();

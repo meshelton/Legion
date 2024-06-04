@@ -8,12 +8,12 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/Pursue.cs" id="5_ck2c0"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_xouxr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c15di"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xblw7"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rarh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlr7q"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpi4m"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fhif"]
 albedo_color = Color(1, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
@@ -21,11 +21,11 @@ script = ExtResource("1_l6jmt")
 
 [node name="Target" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_c15di")
+material_override = SubResource("StandardMaterial3D_xblw7")
 
 [node name="Seek" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_2rarh")
+material_override = SubResource("StandardMaterial3D_qlr7q")
 Color = Color(0, 1, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Seek"]
@@ -39,7 +39,7 @@ ArrivalRadius = 0.1
 
 [node name="Pursue" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
-material_override = SubResource("StandardMaterial3D_gpi4m")
+material_override = SubResource("StandardMaterial3D_1fhif")
 Color = Color(1, 0, 0, 1)
 
 [node name="SteeringController3D" type="Node" parent="Pursue"]
@@ -50,6 +50,10 @@ script = ExtResource("5_ck2c0")
 Target = NodePath("../../../Seek")
 MaxPrediction = 4.0
 Target = NodePath("../../../Seek")
+MaxAcceleration = 10.0
+MaxSpeed = 5.0
+TargetRadius = 0.1
+SlowRadius = 0.26
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)

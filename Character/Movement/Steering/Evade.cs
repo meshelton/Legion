@@ -5,7 +5,7 @@ namespace Legion.Character.Movement.Steering;
 
 [Tool]
 [GlobalClass, Icon("res://Icons/pursue.svg")]
-public partial class Pursue : Arrive
+public partial class Evade : Flee
 {
     private Node3D _target;
     private KinematicTracker _tracker = new();
@@ -28,14 +28,9 @@ public partial class Pursue : Arrive
 
     public override void _Ready()
     {
+        AddChild(_tracker);
         AddChild(_pursuePoint);
-    }
-
-    public override void _Process(double delta)
-    {
-        _tracker.Update((float) delta);
-    }
-    
+    }    
     public override SteeringOutput3D GetSteering()
     {
         Vector3 direction = _tracker.Position - CharacterController.Position;

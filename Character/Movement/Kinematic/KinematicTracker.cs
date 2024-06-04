@@ -2,7 +2,7 @@ using Godot;
 
 namespace Legion.Character.Movement.Kinematic;
 
-public class KinematicTracker
+public partial class KinematicTracker : Node
 {
     public Vector3 Position => _trackedNode.GlobalPosition;
 
@@ -23,6 +23,11 @@ public class KinematicTracker
         _velocity = Vector3.Zero;
         _rotation = 0;
         _trackedNode = node;
+    }
+
+    public override void _Process(double delta)
+    {
+        Update((float) delta);
     }
 
     public void Update(float delta)
