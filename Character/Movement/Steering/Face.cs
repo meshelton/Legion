@@ -28,6 +28,7 @@ public partial class Face : Align
     {
         AddChild(_tracker);
         AddChild(_delegatedTarget);
+        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()

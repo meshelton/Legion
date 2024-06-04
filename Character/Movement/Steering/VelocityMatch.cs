@@ -31,6 +31,7 @@ public partial class VelocityMatch : SteeringBehavior3D
     public override void _Ready()
     {
         AddChild(_tracker);
+        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()

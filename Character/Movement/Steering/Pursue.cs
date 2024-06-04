@@ -10,7 +10,7 @@ public partial class Pursue : Arrive
 {
     private Node3D _target;
     private KinematicTracker _tracker = new();
-    private Node3D _pursuePoint = new();
+    private Node3D _delegatedTarget = new();
 
     [Export]
     public new Node3D Target
@@ -20,7 +20,7 @@ public partial class Pursue : Arrive
         {
             _target = value;
             _tracker.Track(_target);
-            base.Target = _pursuePoint;
+            base.Target = _delegatedTarget;
         }
     }
 
@@ -29,7 +29,7 @@ public partial class Pursue : Arrive
 
     public override void _Ready()
     {
-        AddChild(_pursuePoint);
+        AddChild(_delegatedTarget);
         AddChild(_tracker);
     }
 
@@ -50,8 +50,8 @@ public partial class Pursue : Arrive
             prediction = distance / speed;
         }
 
-        _tracker.UpdateNode(_pursuePoint);
-        _pursuePoint.Position += _tracker.Velocity * prediction;
+        _tracker.UpdateNode(_delegatedTarget);
+        _delegatedTarget.Position += _tracker.Velocity * prediction;
 
         return base.GetSteering();
     }

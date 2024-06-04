@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://cktyfg81701tk"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_2atr3"]
+[ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_2hqsb"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Wander.cs" id="4_w70fd"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="5_2gk4r"]
+[ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_m0fwo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cl8ty"]
+albedo_color = Color(0, 1, 0, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_2atr3")
+
+[node name="Wander" parent="." instance=ExtResource("2_2hqsb")]
+material_override = SubResource("StandardMaterial3D_cl8ty")
+Color = Color(0, 1, 0, 1)
+
+[node name="SteeringController3D" type="Node" parent="Wander"]
+script = ExtResource("5_2gk4r")
+
+[node name="Wander" type="Node" parent="Wander/SteeringController3D"]
+script = ExtResource("4_w70fd")
+WanderOffset = 10.0
+WanderRadius = 5.0
+WanderRate = 50.0
+MaxAcceleration = 1.0
+MaxAngularAcceleration = 10.0
+MaxRotation = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+projection = 1
+size = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("8_m0fwo")

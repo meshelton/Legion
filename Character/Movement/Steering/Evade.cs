@@ -31,6 +31,7 @@ public partial class Evade : Flee
     {
         AddChild(_tracker);
         AddChild(_pursuePoint);
+        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()
