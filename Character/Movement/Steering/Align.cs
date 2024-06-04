@@ -5,8 +5,8 @@ using Legion.Character.Movement.Kinematic;
 namespace Legion.Character.Movement.Steering;
 
 [Tool]
-[GlobalClass, Icon("res://Icons/face.svg")]
-public partial class Face : SteeringBehavior3D
+[GlobalClass, Icon("res://Icons/align.svg")]
+public partial class Align : SteeringBehavior3D
 {
     private Node3D _target;
     private KinematicTracker _tracker = new();

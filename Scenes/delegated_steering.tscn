@@ -8,12 +8,12 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/Pursue.cs" id="5_ck2c0"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_xouxr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xblw7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4yrw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlr7q"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mm8b7"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fhif"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kg3f"]
 albedo_color = Color(1, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
@@ -21,11 +21,11 @@ script = ExtResource("1_l6jmt")
 
 [node name="Target" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_xblw7")
+material_override = SubResource("StandardMaterial3D_r4yrw")
 
 [node name="Seek" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_qlr7q")
+material_override = SubResource("StandardMaterial3D_mm8b7")
 Color = Color(0, 1, 0, 1)
 
 [node name="KinematicController3D" type="Node" parent="Seek"]
@@ -39,7 +39,7 @@ ArrivalRadius = 0.1
 
 [node name="Pursue" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
-material_override = SubResource("StandardMaterial3D_1fhif")
+material_override = SubResource("StandardMaterial3D_1kg3f")
 Color = Color(1, 0, 0, 1)
 
 [node name="SteeringController3D" type="Node" parent="Pursue"]
