@@ -4,13 +4,25 @@ namespace Legion.Character.Movement.Kinematic;
 
 public partial class KinematicTracker : Node
 {
-    public Vector3 Position => _trackedNode.GlobalPosition;
+    public Vector3 Position
+    {
+        get => _trackedNode.GlobalPosition;
+    }
 
-    public float Orientation => _trackedNode.Orientation();
+    public float Orientation
+    {
+        get => _trackedNode.Orientation();
+    }
 
-    public Vector3 Velocity => _velocity;
+    public Vector3 Velocity
+    {
+        get => _velocity;
+    }
 
-    public float Rotation => _rotation;
+    public float Rotation
+    {
+        get => _rotation;
+    }
 
     private Vector3 _prevPosition;
     private Vector3 _velocity;
@@ -27,7 +39,12 @@ public partial class KinematicTracker : Node
 
     public override void _Process(double delta)
     {
-        Update((float) delta);
+        if (Engine.IsEditorHint())
+        {
+            return;
+        }
+
+        Update((float)delta);
     }
 
     public void Update(float delta)
@@ -36,7 +53,7 @@ public partial class KinematicTracker : Node
         {
             return;
         }
-        
+
         float curOrientation = _trackedNode.Orientation();
         Vector3 curPosition = _trackedNode.GlobalPosition;
 
@@ -50,7 +67,6 @@ public partial class KinematicTracker : Node
     public void UpdateNode(Node3D node)
     {
         node.GlobalPosition = Position;
-        node.Rotation = Vector3.Up * Orientation;
+        node.SetOrientation(Orientation);
     }
-
 }

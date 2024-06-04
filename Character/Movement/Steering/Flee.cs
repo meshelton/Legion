@@ -4,7 +4,8 @@ using Legion.Character.Movement.Kinematic;
 namespace Legion.Character.Movement.Steering;
 
 [Tool]
-[GlobalClass, Icon("res://Icons/seek.svg")]
+[GlobalClass]
+[Icon("res://Icons/seek.svg")]
 public partial class Flee : SteeringBehavior3D
 {
     private Node3D _target;
@@ -20,13 +21,15 @@ public partial class Flee : SteeringBehavior3D
             _tracker.Track(_target);
         }
     }
-    [Export] public float MaxAcceleration = 10;
-    
+
+    [Export]
+    public float MaxAcceleration = 10;
+
     public override void _Ready()
     {
         AddChild(_tracker);
-    }    
-    
+    }
+
     public override SteeringOutput3D GetSteering()
     {
         SteeringOutput3D result = new();

@@ -9,29 +9,29 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/Align.cs" id="6_m3vi2"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="6_mib6l"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70ccx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pii65"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqemp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkxhk"]
 albedo_color = Color(0, 0, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32cwq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r52a"]
 albedo_color = Color(0.627451, 0.12549, 0.941176, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yl3y7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcmpp"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpa21"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfu1v"]
 albedo_color = Color(1, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_pu1sm")
 
 [node name="Target" parent="." instance=ExtResource("2_aglm4")]
-material_override = SubResource("StandardMaterial3D_70ccx")
+material_override = SubResource("StandardMaterial3D_pii65")
 
 [node name="Seek" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0.160296)
-material_override = SubResource("StandardMaterial3D_qqemp")
+material_override = SubResource("StandardMaterial3D_hkxhk")
 Color = Color(0, 0, 1, 1)
 
 [node name="SteeringController3D" type="Node" parent="Seek"]
@@ -44,7 +44,7 @@ MaxAcceleration = 2.0
 
 [node name="VelocityMatch" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 4.40795)
-material_override = SubResource("StandardMaterial3D_32cwq")
+material_override = SubResource("StandardMaterial3D_7r52a")
 Color = Color(0.627451, 0.12549, 0.941176, 1)
 
 [node name="SteeringController3D" type="Node" parent="VelocityMatch"]
@@ -57,7 +57,7 @@ MaxAcceleration = 10.0
 
 [node name="Align" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -0.101079, 0, -2.50854)
-material_override = SubResource("StandardMaterial3D_yl3y7")
+material_override = SubResource("StandardMaterial3D_tcmpp")
 Color = Color(1, 1, 0, 1)
 
 [node name="SteeringController3D" type="Node" parent="Align"]
@@ -72,7 +72,7 @@ MaxRotation = 5.0
 
 [node name="Arrive" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37977, 0, 3.16)
-material_override = SubResource("StandardMaterial3D_mpa21")
+material_override = SubResource("StandardMaterial3D_rfu1v")
 Color = Color(1, 0, 0, 1)
 
 [node name="SteeringController3D" type="Node" parent="Arrive"]

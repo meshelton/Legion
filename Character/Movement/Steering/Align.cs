@@ -5,7 +5,8 @@ using Legion.Character.Movement.Kinematic;
 namespace Legion.Character.Movement.Steering;
 
 [Tool]
-[GlobalClass, Icon("res://Icons/align.svg")]
+[GlobalClass]
+[Icon("res://Icons/align.svg")]
 public partial class Align : SteeringBehavior3D
 {
     private Node3D _target;
@@ -22,26 +23,36 @@ public partial class Align : SteeringBehavior3D
         }
     }
 
-    [Export] public float MaxAngularAcceleration;
-    [Export] public float MaxRotation;
+    [Export]
+    public float MaxAngularAcceleration;
 
-    [Export] public float TargetRadius = (float) Math.PI / 36.0f;
-    [Export] public float SlowRadius = (float)Math.PI / 12.0f;
-    [Export] public float TimeToTarget = 0.1f;
+    [Export]
+    public float MaxRotation;
 
+    [Export]
+    public float TargetRadius = (float)Math.PI / 36.0f;
+
+    [Export]
+    public float SlowRadius = (float)Math.PI / 12.0f;
+
+    [Export]
+    public float TimeToTarget = 0.1f;
 
     public override void _Ready()
     {
         AddChild(_tracker);
     }
-    
+
     public override SteeringOutput3D GetSteering()
     {
         SteeringOutput3D result = new();
 
-        var rotation = Mathf.AngleDifference( CharacterController.Orientation, _tracker.Orientation);
-        var rotationSize = Mathf.Abs(rotation);
-        
+        float rotation = Mathf.AngleDifference(
+            CharacterController.Orientation,
+            _tracker.Orientation
+        );
+        float rotationSize = Mathf.Abs(rotation);
+
         // We've arrived, do nothing else;
         if (rotationSize < TargetRadius)
         {
@@ -64,7 +75,7 @@ public partial class Align : SteeringBehavior3D
         result.Angular = targetRotation - CharacterController.Rotation;
         result.Angular /= TimeToTarget;
 
-        var angularAcceleration = Mathf.Abs(result.Angular);
+        float angularAcceleration = Mathf.Abs(result.Angular);
         if (angularAcceleration > MaxAngularAcceleration)
         {
             result.Angular /= angularAcceleration;

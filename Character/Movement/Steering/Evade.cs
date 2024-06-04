@@ -4,13 +4,14 @@ using Legion.Character.Movement.Kinematic;
 namespace Legion.Character.Movement.Steering;
 
 [Tool]
-[GlobalClass, Icon("res://Icons/pursue.svg")]
+[GlobalClass]
+[Icon("res://Icons/pursue.svg")]
 public partial class Evade : Flee
 {
     private Node3D _target;
     private KinematicTracker _tracker = new();
     private Node3D _pursuePoint = new();
-    
+
     [Export]
     public new Node3D Target
     {
@@ -30,7 +31,8 @@ public partial class Evade : Flee
     {
         AddChild(_tracker);
         AddChild(_pursuePoint);
-    }    
+    }
+
     public override SteeringOutput3D GetSteering()
     {
         Vector3 direction = _tracker.Position - CharacterController.Position;
@@ -47,11 +49,10 @@ public partial class Evade : Flee
         {
             prediction = distance / speed;
         }
+
         _tracker.UpdateNode(_pursuePoint);
         _pursuePoint.Position += _tracker.Velocity * prediction;
-        
+
         return base.GetSteering();
     }
-
-    
 }

@@ -4,7 +4,8 @@ using Legion.Character.Movement.Kinematic;
 namespace Legion.Character.Movement.Steering;
 
 [Tool]
-[GlobalClass, Icon("res://Icons/arrive.svg")]
+[GlobalClass]
+[Icon("res://Icons/arrive.svg")]
 public partial class Arrive : SteeringBehavior3D
 {
     private Node3D _target;
@@ -21,13 +22,20 @@ public partial class Arrive : SteeringBehavior3D
         }
     }
 
-    [Export] public float MaxAcceleration;
-    [Export] public float MaxSpeed;
+    [Export]
+    public float MaxAcceleration;
 
-    [Export] public float TargetRadius;
-    [Export] public float SlowRadius;
-    [Export] public float TimeToTarget = 0.1f;
+    [Export]
+    public float MaxSpeed;
 
+    [Export]
+    public float TargetRadius;
+
+    [Export]
+    public float SlowRadius;
+
+    [Export]
+    public float TimeToTarget = 0.1f;
 
     public override void _Ready()
     {
@@ -38,9 +46,9 @@ public partial class Arrive : SteeringBehavior3D
     {
         SteeringOutput3D result = new();
 
-        var direction = _tracker.Position - CharacterController.Position;
-        var distance = direction.Length();
-        
+        Vector3 direction = _tracker.Position - CharacterController.Position;
+        float distance = direction.Length();
+
         // We've arrived, do nothing else;
         if (distance < TargetRadius)
         {
@@ -56,7 +64,7 @@ public partial class Arrive : SteeringBehavior3D
             // In which case scale speed by remaining distance to go
             targetSpeed *= distance / SlowRadius;
         }
-        
+
         // Velocity is just speed with direction
         Vector3 targetVelocity = direction.Normalized() * targetSpeed;
 

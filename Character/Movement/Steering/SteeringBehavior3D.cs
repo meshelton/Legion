@@ -5,9 +5,15 @@ namespace Legion.Character.Movement.Steering;
 [Tool]
 public abstract partial class SteeringBehavior3D : Node
 {
-    protected Node3D Character => CharacterController.Character;
+    protected Node3D Character
+    {
+        get => CharacterController.Character;
+    }
 
-    protected SteeringController3D CharacterController => GetParent<SteeringController3D>();
+    protected SteeringController3D CharacterController
+    {
+        get => GetParent<SteeringController3D>();
+    }
 
     public override void _Ready()
     {
@@ -16,17 +22,17 @@ public abstract partial class SteeringBehavior3D : Node
             UpdateConfigurationWarnings();
         }
     }
-    
+
     public override string[] _GetConfigurationWarnings()
     {
-        var parent = GetParent();
+        Node parent = GetParent();
         if (parent is not SteeringController3D)
         {
-            return new[]{"This must be attached to a SteeringController"};
+            return new[] { "This must be attached to a SteeringController" };
         }
 
-        return new string[]{};
-    }    
+        return new string[] { };
+    }
 
     public abstract SteeringOutput3D GetSteering();
 }
