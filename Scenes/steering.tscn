@@ -9,82 +9,74 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/Align.cs" id="6_m3vi2"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="6_mib6l"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pii65"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jnr65"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkxhk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nclb6"]
 albedo_color = Color(0, 0, 1, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r52a"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65h3k"]
 albedo_color = Color(0.627451, 0.12549, 0.941176, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcmpp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdxr1"]
 albedo_color = Color(1, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfu1v"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2ls8"]
 albedo_color = Color(1, 0, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_pu1sm")
 
 [node name="Target" parent="." instance=ExtResource("2_aglm4")]
-material_override = SubResource("StandardMaterial3D_pii65")
+material_override = SubResource("StandardMaterial3D_jnr65")
 
 [node name="Seek" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0.160296)
-material_override = SubResource("StandardMaterial3D_hkxhk")
+material_override = SubResource("StandardMaterial3D_nclb6")
 Color = Color(0, 0, 1, 1)
 
-[node name="SteeringController3D" type="Node" parent="Seek"]
+[node name="SteeringController3D" type="Node3D" parent="Seek"]
 script = ExtResource("3_jpbql")
 
-[node name="Seek" type="Node" parent="Seek/SteeringController3D" node_paths=PackedStringArray("Target")]
+[node name="Seek" type="Node3D" parent="Seek/SteeringController3D" node_paths=PackedStringArray("Target")]
 script = ExtResource("4_g6nmo")
 Target = NodePath("../../../Target")
-MaxAcceleration = 2.0
 
 [node name="VelocityMatch" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 4.40795)
-material_override = SubResource("StandardMaterial3D_7r52a")
+material_override = SubResource("StandardMaterial3D_65h3k")
 Color = Color(0.627451, 0.12549, 0.941176, 1)
 
-[node name="SteeringController3D" type="Node" parent="VelocityMatch"]
+[node name="SteeringController3D" type="Node3D" parent="VelocityMatch"]
 script = ExtResource("3_jpbql")
 
-[node name="VelocityMatch" type="Node" parent="VelocityMatch/SteeringController3D" node_paths=PackedStringArray("Target")]
+[node name="VelocityMatch" type="Node3D" parent="VelocityMatch/SteeringController3D" node_paths=PackedStringArray("Target")]
 script = ExtResource("5_nrirb")
 Target = NodePath("../../../Seek")
-MaxAcceleration = 10.0
 
 [node name="Align" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -0.101079, 0, -2.50854)
-material_override = SubResource("StandardMaterial3D_tcmpp")
+material_override = SubResource("StandardMaterial3D_wdxr1")
 Color = Color(1, 1, 0, 1)
 
-[node name="SteeringController3D" type="Node" parent="Align"]
+[node name="SteeringController3D" type="Node3D" parent="Align"]
 script = ExtResource("3_jpbql")
-MaxRotation = 0.1
 
-[node name="Align" type="Node" parent="Align/SteeringController3D" node_paths=PackedStringArray("Target")]
+[node name="Align" type="Node3D" parent="Align/SteeringController3D" node_paths=PackedStringArray("Target")]
 script = ExtResource("6_m3vi2")
 Target = NodePath("../../../Target")
-MaxAngularAcceleration = 2.0
-MaxRotation = 5.0
 
 [node name="Arrive" parent="." instance=ExtResource("2_aglm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.37977, 0, 3.16)
-material_override = SubResource("StandardMaterial3D_rfu1v")
+material_override = SubResource("StandardMaterial3D_f2ls8")
 Color = Color(1, 0, 0, 1)
 
-[node name="SteeringController3D" type="Node" parent="Arrive"]
+[node name="SteeringController3D" type="Node3D" parent="Arrive"]
 script = ExtResource("3_jpbql")
 
-[node name="Arrive" type="Node" parent="Arrive/SteeringController3D" node_paths=PackedStringArray("Target")]
+[node name="Arrive" type="Node3D" parent="Arrive/SteeringController3D" node_paths=PackedStringArray("Target")]
 script = ExtResource("5_gku8g")
 Target = NodePath("../../../Target")
-MaxAcceleration = 2.0
-MaxSpeed = 15.0
-TargetRadius = 0.01
-SlowRadius = 5.0
+MaxAcceleration = 20.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)

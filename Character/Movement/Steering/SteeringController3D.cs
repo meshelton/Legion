@@ -26,7 +26,7 @@ public partial class SteeringController3D : Node3D
 
     public Vector3 OrientationVector
     {
-        get => Vector3.Forward.Rotated(Vector3.Up, _orientation).Normalized();
+        get => -Vector3.Forward.Rotated(Vector3.Up, _orientation).Normalized();
     }
 
     public Vector3 Velocity

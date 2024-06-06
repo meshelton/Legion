@@ -27,9 +27,9 @@ public partial class Flee : SteeringBehavior3D
 
     public override void _Ready()
     {
+        base._Ready();
         _tracker = new();
         AddChild(_tracker);
-        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()

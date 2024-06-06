@@ -25,15 +25,15 @@ public partial class Evade : Flee
     }
 
     [Export]
-    public float MaxPrediction;
+    public float MaxPrediction = 2.0f;
 
     public override void _Ready()
     {
+        base._Ready();
         _tracker = new();
         _delegatedTarget = new();
         AddChild(_tracker);
         AddChild(_delegatedTarget);
-        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()

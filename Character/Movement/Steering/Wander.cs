@@ -29,6 +29,7 @@ public partial class Wander : Face
 
     public override void _Ready()
     {
+        base._Ready();
         _delegatedTarget = new();
         AddChild(_delegatedTarget);
         Target = _delegatedTarget;
@@ -38,16 +39,10 @@ public partial class Wander : Face
             GD.Print("Getting steering to initialize the marker");
             _delegatedTarget.Owner = GetTree().EditedSceneRoot;
 
-            float targetOrientation = WanderOrientation + CharacterController.Orientation;
-            _delegatedTarget.Position =
-                CharacterController.Position + WanderOffset * CharacterController.OrientationVector;
-            _delegatedTarget.Position +=
-                WanderRadius * Vector3.Forward.Rotated(Vector3.Up, targetOrientation);
+            GetSteering();
 
             GD.Print(_delegatedTarget.Position);
         }
-
-        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()
@@ -60,7 +55,7 @@ public partial class Wander : Face
             CharacterController.Position + WanderOffset * CharacterController.OrientationVector;
 
         _delegatedTarget.Position +=
-            WanderRadius * Vector3.Forward.Rotated(Vector3.Up, targetOrientation);
+            WanderRadius * -Vector3.Forward.Rotated(Vector3.Up, targetOrientation);
 
         SteeringOutput3D result = base.GetSteering();
 

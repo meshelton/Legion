@@ -15,10 +15,7 @@ public partial class Cube : MeshInstance3D
         set
         {
             _color = value;
-            if (_material == null)
-            {
-                _material = new StandardMaterial3D();
-            }
+            _material ??= new StandardMaterial3D();
 
             _material.AlbedoColor = _color;
             MaterialOverride = _material;

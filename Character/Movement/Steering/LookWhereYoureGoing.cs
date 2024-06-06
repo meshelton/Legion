@@ -25,9 +25,9 @@ public partial class LookWhereYoureGoing : Align
 
     public override void _Ready()
     {
+        base._Ready();
         _delegatedTarget = new();
         AddChild(_delegatedTarget);
-        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()

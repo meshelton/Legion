@@ -19,18 +19,20 @@ public partial class Face : Align
         set
         {
             _target = value;
-            _tracker.Track(_target);
+            _tracker?.Track(_target);
             base.Target = _delegatedTarget;
         }
     }
 
     public override void _Ready()
     {
+        base._Ready();
         _tracker = new();
+        _tracker.Track(_target);
         _delegatedTarget = new();
+        base.Target = _delegatedTarget;
         AddChild(_tracker);
         AddChild(_delegatedTarget);
-        base._Ready();
     }
 
     public override SteeringOutput3D GetSteering()

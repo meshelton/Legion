@@ -18,30 +18,31 @@ public partial class Arrive : SteeringBehavior3D
         set
         {
             _target = value;
-            _tracker.Track(_target);
+            _tracker?.Track(_target);
         }
     }
 
     [Export]
-    public float MaxAcceleration;
+    public float MaxAcceleration = 5.0f;
 
     [Export]
-    public float MaxSpeed;
+    public float MaxSpeed = 3.0f;
 
     [Export]
-    public float TargetRadius;
+    public float TargetRadius = 0.1f;
 
     [Export]
-    public float SlowRadius;
+    public float SlowRadius = 0.5f;
 
     [Export]
     public float TimeToTarget = 0.1f;
 
     public override void _Ready()
     {
-        _tracker = new();
-        AddChild(_tracker);
         base._Ready();
+        _tracker = new();
+        _tracker.Track(_target);
+        AddChild(_tracker);
     }
 
     public override SteeringOutput3D GetSteering()

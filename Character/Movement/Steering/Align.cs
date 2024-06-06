@@ -1,4 +1,3 @@
-using System;
 using Godot;
 using Legion.Character.Movement.Kinematic;
 
@@ -19,30 +18,31 @@ public partial class Align : SteeringBehavior3D
         set
         {
             _target = value;
-            _tracker.Track(_target);
+            _tracker?.Track(_target);
         }
     }
 
     [Export]
-    public float MaxAngularAcceleration;
+    public float MaxAngularAcceleration = 100;
 
     [Export]
-    public float MaxRotation;
+    public float MaxRotation = Mathf.DegToRad(30.0f);
 
     [Export]
-    public float TargetRadius = (float)Math.PI / 36.0f;
+    public float TargetRadius = Mathf.DegToRad(2.0f);
 
     [Export]
-    public float SlowRadius = (float)Math.PI / 12.0f;
+    public float SlowRadius = Mathf.DegToRad(20.0f);
 
     [Export]
     public float TimeToTarget = 0.1f;
 
     public override void _Ready()
     {
-        _tracker = new();
-        AddChild(_tracker);
         base._Ready();
+        _tracker = new();
+        _tracker.Track(_target);
+        AddChild(_tracker);
     }
 
     public override SteeringOutput3D GetSteering()

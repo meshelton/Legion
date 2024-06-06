@@ -17,7 +17,7 @@ public static class Extensions
 
     public static Vector3 OrientationVector(this Node3D node)
     {
-        return node.Transform.Basis.Z;
+        return node.Transform.Basis.Z.Normalized();
     }
 
     public static float RandBinom(this RandomNumberGenerator rng)

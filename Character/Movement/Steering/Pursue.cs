@@ -19,18 +19,21 @@ public partial class Pursue : Arrive
         set
         {
             _target = value;
-            _tracker.Track(_target);
+            _tracker?.Track(_target);
             base.Target = _delegatedTarget;
         }
     }
 
     [Export]
-    public float MaxPrediction;
+    public float MaxPrediction = 2.0f;
 
     public override void _Ready()
     {
+        base._Ready();
         _tracker = new();
+        _tracker.Track(_target);
         _delegatedTarget = new();
+        base.Target = _delegatedTarget;
         AddChild(_delegatedTarget);
         AddChild(_tracker);
     }
