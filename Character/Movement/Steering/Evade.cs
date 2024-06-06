@@ -9,8 +9,8 @@ namespace Legion.Character.Movement.Steering;
 public partial class Evade : Flee
 {
     private Node3D _target;
-    private KinematicTracker _tracker = new();
-    private Node3D _pursuePoint = new();
+    private KinematicTracker _tracker;
+    private Marker3D _delegatedTarget;
 
     [Export]
     public new Node3D Target
@@ -20,7 +20,7 @@ public partial class Evade : Flee
         {
             _target = value;
             _tracker.Track(_target);
-            base.Target = _pursuePoint;
+            base.Target = _delegatedTarget;
         }
     }
 
@@ -29,8 +29,10 @@ public partial class Evade : Flee
 
     public override void _Ready()
     {
+        _tracker = new();
+        _delegatedTarget = new();
         AddChild(_tracker);
-        AddChild(_pursuePoint);
+        AddChild(_delegatedTarget);
         base._Ready();
     }
 
@@ -51,8 +53,8 @@ public partial class Evade : Flee
             prediction = distance / speed;
         }
 
-        _tracker.UpdateNode(_pursuePoint);
-        _pursuePoint.Position += _tracker.Velocity * prediction;
+        _tracker.UpdateNode(_delegatedTarget);
+        _delegatedTarget.Position += _tracker.Velocity * prediction;
 
         return base.GetSteering();
     }

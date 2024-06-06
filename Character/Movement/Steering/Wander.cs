@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 
 namespace Legion.Character.Movement.Steering;
 
@@ -7,29 +8,45 @@ namespace Legion.Character.Movement.Steering;
 [Icon("res://Icons/wander.svg")]
 public partial class Wander : Face
 {
-    private Node3D _delegatedTarget = new();
+    private Marker3D _delegatedTarget;
 
     [Export]
-    public float WanderOffset;
+    public float WanderOffset = 3.0f;
 
     [Export]
-    public float WanderRadius;
+    public float WanderRadius = 1.0f;
 
     [Export]
-    public float WanderRate;
+    public float WanderRate = (float)Math.PI / 4.0f;
 
     [Export]
     public float WanderOrientation;
 
     [Export]
-    public float MaxAcceleration;
+    public float MaxAcceleration = 2.0f;
 
     private RandomNumberGenerator _rng = new();
 
     public override void _Ready()
     {
+        _delegatedTarget = new();
         AddChild(_delegatedTarget);
         Target = _delegatedTarget;
+
+        if (Engine.IsEditorHint())
+        {
+            GD.Print("Getting steering to initialize the marker");
+            _delegatedTarget.Owner = GetTree().EditedSceneRoot;
+
+            float targetOrientation = WanderOrientation + CharacterController.Orientation;
+            _delegatedTarget.Position =
+                CharacterController.Position + WanderOffset * CharacterController.OrientationVector;
+            _delegatedTarget.Position +=
+                WanderRadius * Vector3.Forward.Rotated(Vector3.Up, targetOrientation);
+
+            GD.Print(_delegatedTarget.Position);
+        }
+
         base._Ready();
     }
 
@@ -45,7 +62,7 @@ public partial class Wander : Face
         _delegatedTarget.Position +=
             WanderRadius * Vector3.Forward.Rotated(Vector3.Up, targetOrientation);
 
-        var result = base.GetSteering();
+        SteeringOutput3D result = base.GetSteering();
 
         result.Linear = MaxAcceleration * CharacterController.OrientationVector;
 

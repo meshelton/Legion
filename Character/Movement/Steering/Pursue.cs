@@ -9,8 +9,8 @@ namespace Legion.Character.Movement.Steering;
 public partial class Pursue : Arrive
 {
     private Node3D _target;
-    private KinematicTracker _tracker = new();
-    private Node3D _delegatedTarget = new();
+    private KinematicTracker _tracker;
+    private Marker3D _delegatedTarget;
 
     [Export]
     public new Node3D Target
@@ -29,6 +29,8 @@ public partial class Pursue : Arrive
 
     public override void _Ready()
     {
+        _tracker = new();
+        _delegatedTarget = new();
         AddChild(_delegatedTarget);
         AddChild(_tracker);
     }

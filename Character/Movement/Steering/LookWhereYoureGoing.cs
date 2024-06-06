@@ -10,7 +10,7 @@ public partial class LookWhereYoureGoing : Align
 {
     private Node3D _target;
 
-    private Node3D _delegatedTarget = new();
+    private Marker3D _delegatedTarget;
 
     [Export]
     public new Node3D Target
@@ -25,6 +25,7 @@ public partial class LookWhereYoureGoing : Align
 
     public override void _Ready()
     {
+        _delegatedTarget = new();
         AddChild(_delegatedTarget);
         base._Ready();
     }

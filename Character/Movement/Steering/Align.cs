@@ -10,7 +10,7 @@ namespace Legion.Character.Movement.Steering;
 public partial class Align : SteeringBehavior3D
 {
     private Node3D _target;
-    private KinematicTracker _tracker = new();
+    private KinematicTracker _tracker;
 
     [Export]
     public Node3D Target
@@ -40,6 +40,7 @@ public partial class Align : SteeringBehavior3D
 
     public override void _Ready()
     {
+        _tracker = new();
         AddChild(_tracker);
         base._Ready();
     }
