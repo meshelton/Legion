@@ -6,14 +6,14 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="5_2gk4r"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_m0fwo"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2eev"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gox3l"]
 albedo_color = Color(0, 1, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_2atr3")
 
 [node name="Wander" parent="." instance=ExtResource("2_2hqsb")]
-material_override = SubResource("StandardMaterial3D_g2eev")
+material_override = SubResource("StandardMaterial3D_gox3l")
 Color = Color(0, 1, 0, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Wander"]
@@ -21,9 +21,14 @@ script = ExtResource("5_2gk4r")
 
 [node name="Wander" type="Node3D" parent="Wander/SteeringController3D" node_paths=PackedStringArray("Target", "Target")]
 script = ExtResource("4_w70fd")
-WanderOffset = 4.0
+WanderOffset = 11.6798
+WanderRadius = 2.60842
+WanderRate = 5.0
+MaxAcceleration = 2.0
 Target = NodePath("@Node3D@17544")
 Target = NodePath("@Node3D@17544")
+MaxAngularAcceleration = 5.0
+MaxRotation = 5.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
