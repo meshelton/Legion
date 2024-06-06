@@ -3,7 +3,7 @@ using Godot;
 namespace Legion.Character.Movement.Steering;
 
 [Tool]
-public abstract partial class SteeringBehavior3D : Node
+public abstract partial class SteeringBehavior3D : Node3D
 {
     protected Node3D Character
     {

@@ -29,7 +29,7 @@ public partial class Wander : Face
     public override void _Ready()
     {
         AddChild(_delegatedTarget);
-        base.Target = _delegatedTarget;
+        Target = _delegatedTarget;
         base._Ready();
     }
 
@@ -37,7 +37,7 @@ public partial class Wander : Face
     {
         WanderOrientation += _rng.RandBinom() * WanderRate;
 
-        var targetOrientation = WanderOrientation + CharacterController.Orientation;
+        float targetOrientation = WanderOrientation + CharacterController.Orientation;
 
         _delegatedTarget.Position =
             CharacterController.Position + WanderOffset * CharacterController.OrientationVector;

@@ -6,7 +6,7 @@ namespace Legion.Character.Movement.Steering;
 [Tool]
 [GlobalClass]
 [Icon("res://Icons/kinematics.svg")]
-public partial class SteeringController3D : Node
+public partial class SteeringController3D : Node3D
 {
     [Export]
     public float MaxSpeed = 10;
@@ -14,7 +14,7 @@ public partial class SteeringController3D : Node
     [Export]
     public float MaxRotation = Mathf.Pi / 2;
 
-    public Vector3 Position
+    public new Vector3 Position
     {
         get => _position;
     }
@@ -34,7 +34,7 @@ public partial class SteeringController3D : Node
         get => _velocity;
     }
 
-    public float Rotation
+    public new float Rotation
     {
         get => _rotation;
     }
