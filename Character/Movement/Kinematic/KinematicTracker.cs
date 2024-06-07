@@ -37,7 +37,7 @@ public partial class KinematicTracker : Node
         _trackedNode = node;
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (Engine.IsEditorHint())
         {

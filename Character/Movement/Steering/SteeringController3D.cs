@@ -42,7 +42,7 @@ public partial class SteeringController3D : Node3D
     }
 
     // TODO: Lack of drag force causes various steering behaviors to oscillate forever
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         if (Engine.IsEditorHint())
         {

@@ -8,15 +8,15 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/Face.cs" id="7_yyo0d"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_xouxr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fsc0"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fnb6y"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0q81"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arf40"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1opiw"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mf65t"]
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2damn"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0pvmu"]
 albedo_color = Color(0.627451, 0.12549, 0.941176, 1)
 
 [node name="Main" type="Node3D"]
@@ -24,11 +24,11 @@ script = ExtResource("1_l6jmt")
 
 [node name="Target" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_2fsc0")
+material_override = SubResource("StandardMaterial3D_fnb6y")
 
 [node name="Seek" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_x0q81")
+material_override = SubResource("StandardMaterial3D_arf40")
 Color = Color(0, 1, 0, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Seek"]
@@ -41,7 +41,7 @@ MaxAcceleration = 2.0
 
 [node name="Pursue" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
-material_override = SubResource("StandardMaterial3D_1opiw")
+material_override = SubResource("StandardMaterial3D_mf65t")
 Color = Color(1, 0, 0, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Pursue"]
@@ -55,7 +55,7 @@ MaxSpeed = 10.0
 
 [node name="Face" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(-0.969753, 0, -0.244089, 0, 1, 0, 0.244089, 0, -0.969753, 0.239578, 0, -2.92602)
-material_override = SubResource("StandardMaterial3D_2damn")
+material_override = SubResource("StandardMaterial3D_0pvmu")
 Color = Color(0.627451, 0.12549, 0.941176, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Face"]

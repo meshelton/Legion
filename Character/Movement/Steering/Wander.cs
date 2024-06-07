@@ -9,7 +9,7 @@ namespace Legion.Character.Movement.Steering;
 [Icon("res://Icons/wander.svg")]
 public partial class Wander : Face
 {
-    private Node3D _delegatedTarget;
+    private DebugDelegatedTarget _delegatedTarget;
 
     [Export]
     public float WanderOffset = 3.0f;
