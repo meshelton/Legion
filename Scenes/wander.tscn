@@ -1,19 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://cktyfg81701tk"]
+[gd_scene load_steps=9 format=3 uid="uid://cktyfg81701tk"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_2atr3"]
 [ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_2hqsb"]
 [ext_resource type="Script" path="res://Character/Movement/Steering/Wander.cs" id="4_w70fd"]
 [ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="5_2gk4r"]
+[ext_resource type="Texture2D" uid="uid://bd8sjv0pdj201" path="res://Textures/PolygonPrototype_Texture_01.png" id="6_2vsx8"]
+[ext_resource type="PackedScene" uid="uid://t47hbvsch43h" path="res://Objects/arrow.glb" id="6_jewtk"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_m0fwo"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1s43m"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rr2y6"]
 albedo_color = Color(0, 1, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_2atr3")
 
 [node name="Wander" parent="." instance=ExtResource("2_2hqsb")]
-material_override = SubResource("StandardMaterial3D_1s43m")
+material_override = SubResource("StandardMaterial3D_rr2y6")
 Color = Color(0, 1, 0, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Wander"]
@@ -22,12 +24,18 @@ MaxSpeed = 1.0
 
 [node name="Wander" type="Node3D" parent="Wander/SteeringController3D" node_paths=PackedStringArray("Target", "Target")]
 script = ExtResource("4_w70fd")
-WanderOrientation = -0.597877
-Target = NodePath("@Marker3D@54126")
-Target = NodePath("@Marker3D@54126")
+WanderOffset = 4.65741
+WanderRadius = 3.16197
+Target = NodePath("@Marker3D@39880")
+Target = NodePath("@Marker3D@39880")
+MaxRotation = 3.142
+
+[node name="arrow" parent="Wander/SteeringController3D/Wander" instance=ExtResource("6_jewtk")]
+transform = Transform3D(5, 0, 0, 0, -2.18557e-07, -5, 0, 5, -2.18557e-07, 3, 0, 0)
+SyntyTexture = ExtResource("6_2vsx8")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 10, 0)
 projection = 1
 size = 10.0
 

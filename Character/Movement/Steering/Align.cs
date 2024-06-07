@@ -49,11 +49,10 @@ public partial class Align : SteeringBehavior3D
     {
         SteeringOutput3D result = new();
 
-        float rotation = Mathf.AngleDifference(
-            CharacterController.Orientation,
-            _tracker.Orientation
-        );
+        float rotation = Mathf.AngleDifference(Character.Orientation(), _tracker.Orientation);
+
         float rotationSize = Mathf.Abs(rotation);
+        int rotationDirection = Mathf.Sign(rotation);
 
         // We've arrived, do nothing else;
         if (rotationSize < TargetRadius)
@@ -72,7 +71,7 @@ public partial class Align : SteeringBehavior3D
             targetRotation = MaxRotation * (rotationSize / SlowRadius);
         }
 
-        targetRotation *= Mathf.Sign(rotation);
+        targetRotation *= rotationDirection;
 
         result.Angular = targetRotation - CharacterController.Rotation;
         result.Angular /= TimeToTarget;

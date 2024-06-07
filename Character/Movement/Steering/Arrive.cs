@@ -49,7 +49,7 @@ public partial class Arrive : SteeringBehavior3D
     {
         SteeringOutput3D result = new();
 
-        Vector3 direction = _tracker.Position - CharacterController.Position;
+        Vector3 direction = _tracker.Position - Character.Position;
         float distance = direction.Length();
 
         // We've arrived, do nothing else;

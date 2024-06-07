@@ -22,3 +22,7 @@ project/assembly_name="Legion"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/LegionAI/plugin.cfg")
+
+[filesystem]
+
+import/fbx/enabled=false

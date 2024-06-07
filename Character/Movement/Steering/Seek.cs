@@ -38,7 +38,7 @@ public partial class Seek : SteeringBehavior3D
         SteeringOutput3D result = new();
 
         // Get the direction to the target
-        result.Linear = _tracker.Position - CharacterController.Position;
+        result.Linear = _tracker.Position - Character.Position;
 
         result.Linear = result.Linear.Normalized();
         result.Linear *= MaxAcceleration;

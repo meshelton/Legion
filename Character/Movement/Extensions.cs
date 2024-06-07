@@ -5,9 +5,10 @@ namespace Legion.Character.Movement;
 
 public static class Extensions
 {
+    // A counterclockwise angle, in radians, from the positive z-axis
     public static float Orientation(this Node3D node)
     {
-        return node.Rotation.Y;
+        return Vector3.ModelFront.SignedAngleTo(node.OrientationVector(), Vector3.Up);
     }
 
     public static void SetOrientation(this Node3D node, float orientation)
@@ -17,7 +18,7 @@ public static class Extensions
 
     public static Vector3 OrientationVector(this Node3D node)
     {
-        return node.Transform.Basis.Z.Normalized();
+        return node.Basis.Z.Normalized();
     }
 
     public static float RandBinom(this RandomNumberGenerator rng)

@@ -37,7 +37,7 @@ public partial class Face : Align
 
     public override SteeringOutput3D GetSteering()
     {
-        Vector3 direction = _tracker.Position - CharacterController.Position;
+        Vector3 direction = _tracker.Position - Character.Position;
 
         if (direction.Length() == 0)
         {
@@ -45,6 +45,7 @@ public partial class Face : Align
         }
 
         _tracker.UpdateNode(_delegatedTarget);
+        // Book gives this as -X instead. Why does it need to be X here?
         _delegatedTarget.SetOrientation(Mathf.Atan2(direction.X, direction.Z));
         return base.GetSteering();
     }

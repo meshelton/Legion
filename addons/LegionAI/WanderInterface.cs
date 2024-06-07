@@ -1,5 +1,4 @@
 ﻿using Godot;
-using Godot.NativeInterop;
 using Legion.Character.Movement;
 using Legion.Character.Movement.Steering;
 
@@ -29,7 +28,8 @@ public partial class WanderInterface : EditorNode3DGizmoPlugin
 
         Wander wander = (Wander)gizmo.GetNode3D();
 
-        Vector3 wanderOffsetPoint = -Vector3.Forward * wander.WanderOffset;
+        Vector3 wanderOffsetPoint = Vector3.ModelFront * wander.WanderOffset;
+
         Vector3 wanderRadiusRightPoint = wanderOffsetPoint + Vector3.Right * wander.WanderRadius;
         Vector3 wanderRadiusLeftPoint = wanderOffsetPoint + Vector3.Left * wander.WanderRadius;
         TorusMesh torusMesh = new();
@@ -71,14 +71,15 @@ public partial class WanderInterface : EditorNode3DGizmoPlugin
             return;
         }
         Vector3 gizmoPlaneMouseIntersection = intersectsRayNullable.Value;
-        if (handleId is OffsetHandleId)
+        switch (handleId)
         {
-            SetOffsetHandle(wander, gizmoPlaneMouseIntersection);
-        }
-
-        if (handleId is RightRadiusHandleId or LeftRadiusHandleId)
-        {
-            SetRadiusHandle(wander, gizmoPlaneMouseIntersection);
+            case OffsetHandleId:
+                SetOffsetHandle(wander, gizmoPlaneMouseIntersection);
+                break;
+            case RightRadiusHandleId
+            or LeftRadiusHandleId:
+                SetRadiusHandle(wander, gizmoPlaneMouseIntersection);
+                break;
         }
 
         wander.UpdateGizmos();
@@ -86,14 +87,14 @@ public partial class WanderInterface : EditorNode3DGizmoPlugin
 
     private void SetRadiusHandle(Wander wander, Vector3 gizmoPlaneMouseIntersection)
     {
-        Vector3 forward = -Vector3.Forward;
+        Vector3 forward = wander.Character.OrientationVector();
         Plane horizontalPlane = new(forward, wander.GlobalPosition);
         wander.WanderRadius = horizontalPlane.Project(gizmoPlaneMouseIntersection).Length();
     }
 
     private void SetOffsetHandle(Wander wander, Vector3 gizmoPlaneMouseIntersection)
     {
-        Vector3 forward = -Vector3.Forward;
+        Vector3 forward = wander.Character.OrientationVector();
         Vector3 right = forward.Cross(Vector3.Up).Normalized();
         Plane forwardPlane = new(right, wander.GlobalPosition);
         wander.WanderOffset = forwardPlane.Project(gizmoPlaneMouseIntersection).Length();

@@ -40,7 +40,7 @@ public partial class Pursue : Arrive
 
     public override SteeringOutput3D GetSteering()
     {
-        Vector3 direction = _tracker.Position - CharacterController.Position;
+        Vector3 direction = _tracker.Position - Character.Position;
         float distance = direction.Length();
 
         float speed = CharacterController.Velocity.Length();

@@ -1,23 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://co2bp4apibbd5"]
+[gd_scene load_steps=12 format=3 uid="uid://co2bp4apibbd5"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_l6jmt"]
 [ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_npo4p"]
 [ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="3_kdv65"]
-[ext_resource type="Script" path="res://Character/Movement/Kinematic/KinematicController3D.cs" id="3_rfpyk"]
-[ext_resource type="Script" path="res://Character/Movement/Kinematic/KinematicArrive3D.cs" id="4_nutcs"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Seek.cs" id="4_0k4lh"]
 [ext_resource type="Script" path="res://Character/Movement/Steering/Pursue.cs" id="5_ck2c0"]
 [ext_resource type="Script" path="res://Character/Movement/Steering/Face.cs" id="7_yyo0d"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_xouxr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_57ogq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2fsc0"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wh74f"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0q81"]
 albedo_color = Color(0, 1, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uaoq7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1opiw"]
 albedo_color = Color(1, 0, 0, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6rwyp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2damn"]
 albedo_color = Color(0.627451, 0.12549, 0.941176, 1)
 
 [node name="Main" type="Node3D"]
@@ -25,25 +24,24 @@ script = ExtResource("1_l6jmt")
 
 [node name="Target" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_57ogq")
+material_override = SubResource("StandardMaterial3D_2fsc0")
 
 [node name="Seek" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3.45978)
-material_override = SubResource("StandardMaterial3D_wh74f")
+material_override = SubResource("StandardMaterial3D_x0q81")
 Color = Color(0, 1, 0, 1)
 
-[node name="KinematicController3D" type="Node" parent="Seek"]
-script = ExtResource("3_rfpyk")
+[node name="SteeringController3D" type="Node3D" parent="Seek"]
+script = ExtResource("3_kdv65")
 
-[node name="KinematicArrive3D" type="Node" parent="Seek/KinematicController3D" node_paths=PackedStringArray("Target")]
-script = ExtResource("4_nutcs")
+[node name="Seek" type="Node3D" parent="Seek/SteeringController3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("4_0k4lh")
 Target = NodePath("../../../Target")
-MaxSpeed = 3.0
-ArrivalRadius = 0.1
+MaxAcceleration = 2.0
 
 [node name="Pursue" parent="." instance=ExtResource("2_npo4p")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 0)
-material_override = SubResource("StandardMaterial3D_uaoq7")
+material_override = SubResource("StandardMaterial3D_1opiw")
 Color = Color(1, 0, 0, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Pursue"]
@@ -53,13 +51,11 @@ script = ExtResource("3_kdv65")
 script = ExtResource("5_ck2c0")
 Target = NodePath("../../../Seek")
 Target = NodePath("../../../Seek")
-MaxAcceleration = 2.0
-MaxSpeed = 5.0
-SlowRadius = 2.0
+MaxSpeed = 10.0
 
 [node name="Face" parent="." instance=ExtResource("2_npo4p")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.239578, 0, -2.92602)
-material_override = SubResource("StandardMaterial3D_6rwyp")
+transform = Transform3D(-0.969753, 0, -0.244089, 0, 1, 0, 0.244089, 0, -0.969753, 0.239578, 0, -2.92602)
+material_override = SubResource("StandardMaterial3D_2damn")
 Color = Color(0.627451, 0.12549, 0.941176, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Face"]
@@ -69,11 +65,11 @@ script = ExtResource("3_kdv65")
 script = ExtResource("7_yyo0d")
 Target = NodePath("../../../Pursue")
 Target = NodePath("../../../Pursue")
-MaxAngularAcceleration = 200.0
 MaxRotation = 2.0
+TimeToTarget = 0.01
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 10, 0)
 projection = 1
 size = 10.0
 

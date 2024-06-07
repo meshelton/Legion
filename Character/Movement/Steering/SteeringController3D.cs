@@ -8,42 +8,21 @@ namespace Legion.Character.Movement.Steering;
 [Icon("res://Icons/kinematics.svg")]
 public partial class SteeringController3D : Node3D
 {
+    // TODO: Add a configuration environment that allows setting defaults for all these values
     [Export]
     public float MaxSpeed = 10;
 
     [Export]
     public float MaxRotation = Mathf.Pi / 2;
 
-    public new Vector3 Position
-    {
-        get => _position;
-    }
+    [Export]
+    public bool IncludeDampening = true;
+    public Vector3 Velocity { get; private set; }
+    public new float Rotation { get; private set; }
 
-    public float Orientation
-    {
-        get => _orientation;
-    }
-
-    public Vector3 OrientationVector
-    {
-        get => -Vector3.Forward.Rotated(Vector3.Up, _orientation).Normalized();
-    }
-
-    public Vector3 Velocity
-    {
-        get => _velocity;
-    }
-
-    public new float Rotation
-    {
-        get => _rotation;
-    }
-
+    // Might make sense to get rid of these.
     private Vector3 _position;
     private float _orientation;
-
-    private Vector3 _velocity;
-    private float _rotation;
 
     public Node3D Character
     {
@@ -84,32 +63,22 @@ public partial class SteeringController3D : Node3D
 
     private void Update(SteeringOutput3D steering, float maxSpeed, float maxRotation, float time)
     {
-        _position += _velocity * time;
-        _orientation += _rotation * time;
+        _position += Velocity * time;
+        _orientation += Rotation * time;
 
-        _velocity += steering.Linear * time;
-        _rotation += steering.Angular * time;
+        Velocity += steering.Linear * time;
+        Rotation += steering.Angular * time;
 
-        if (_velocity.Length() > maxSpeed)
+        if (Velocity.Length() > maxSpeed)
         {
-            _velocity = _velocity.Normalized();
-            _velocity *= maxSpeed;
+            Velocity = Velocity.Normalized();
+            Velocity *= maxSpeed;
         }
 
-        if (_rotation > maxRotation)
+        if (Rotation > maxRotation)
         {
-            _rotation = maxRotation;
+            Rotation = maxRotation;
         }
-    }
-
-    private float NewOrientation(float current, Vector3 velocity)
-    {
-        if (velocity.Length() > 0)
-        {
-            return Mathf.Atan2(-velocity.X, velocity.Z);
-        }
-
-        return current;
     }
 
     public override string[] _GetConfigurationWarnings()
