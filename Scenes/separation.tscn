@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=3 uid="uid://d1pd2ne68g175"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_1als1"]
+[ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_e033n"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="3_p6pi5"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Separation.cs" id="4_am385"]
+[ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="5_kccxh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogsi5"]
+albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj1kt"]
+albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qy0e8"]
+albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrfam"]
+albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12qu7"]
+albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_1als1")
+
+[node name="Separation" parent="." instance=ExtResource("2_e033n")]
+material_override = SubResource("StandardMaterial3D_ogsi5")
+Color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Separation"]
+script = ExtResource("3_p6pi5")
+MaxSpeed = 1.0
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="Separation" type="Node3D" parent="Separation/SteeringController3D"]
+script = ExtResource("4_am385")
+DecayCoefficient = 5.0
+
+[node name="Separation2" parent="." instance=ExtResource("2_e033n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.379023, 0, -1.6242)
+material_override = SubResource("StandardMaterial3D_cj1kt")
+Color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Separation2"]
+script = ExtResource("3_p6pi5")
+MaxSpeed = 1.0
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="Separation" type="Node3D" parent="Separation2/SteeringController3D"]
+script = ExtResource("4_am385")
+DecayCoefficient = -2.0
+
+[node name="Separation3" parent="." instance=ExtResource("2_e033n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74457, 0, 0)
+material_override = SubResource("StandardMaterial3D_qy0e8")
+Color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Separation3"]
+script = ExtResource("3_p6pi5")
+MaxSpeed = 1.0
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="Separation" type="Node3D" parent="Separation3/SteeringController3D"]
+script = ExtResource("4_am385")
+DecayCoefficient = -2.0
+
+[node name="Separation4" parent="." instance=ExtResource("2_e033n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.75535)
+material_override = SubResource("StandardMaterial3D_lrfam")
+Color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Separation4"]
+script = ExtResource("3_p6pi5")
+MaxSpeed = 1.0
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="Separation" type="Node3D" parent="Separation4/SteeringController3D"]
+script = ExtResource("4_am385")
+DecayCoefficient = -1.0
+
+[node name="Separation5" parent="." instance=ExtResource("2_e033n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51622, 0, 0)
+material_override = SubResource("StandardMaterial3D_12qu7")
+Color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Separation5"]
+script = ExtResource("3_p6pi5")
+MaxSpeed = 1.0
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="Separation" type="Node3D" parent="Separation5/SteeringController3D"]
+script = ExtResource("4_am385")
+DecayCoefficient = -1.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 10, 0)
+projection = 1
+size = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("5_kccxh")

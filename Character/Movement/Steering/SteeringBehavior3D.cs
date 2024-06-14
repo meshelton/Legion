@@ -15,6 +15,11 @@ public abstract partial class SteeringBehavior3D : Node3D
         get => GetParent<SteeringController3D>();
     }
 
+    public SteeringWorld3D SteeringWorld3D
+    {
+        get => CharacterController.World;
+    }
+
     public override void _Ready()
     {
         if (Engine.IsEditorHint())
