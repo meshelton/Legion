@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://bdiqs76wl0inl"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_n2pij"]
+[ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_2wdng"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="3_e0fex"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/BlendedSteering3D.cs" id="4_je5fo"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Seek.cs" id="4_s3o8g"]
+[ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="5_0lvm6"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Wander.cs" id="5_pbeb2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xciby"]
+albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_n2pij")
+
+[node name="Separation" parent="." instance=ExtResource("2_2wdng")]
+material_override = SubResource("StandardMaterial3D_xciby")
+
+[node name="SteeringController3D" type="Node3D" parent="Separation"]
+script = ExtResource("3_e0fex")
+
+[node name="BlendedSteering3D" type="Node3D" parent="Separation/SteeringController3D"]
+script = ExtResource("4_je5fo")
+Blending = [Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("5_pbeb2"),"WanderOffset":3.0,"WanderRadius":1.0,"WanderRate":0.785398,"WanderOrientation":0.0,"MaxAcceleration":2.0,"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":Resource("res://Objects/DebugDelegatedTarget.cs"))
+,"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":Resource("res://Objects/DebugDelegatedTarget.cs"))
+,"MaxAngularAcceleration":100.0,"MaxRotation":0.523599,"TargetRadius":0.0349066,"SlowRadius":0.349066,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("4_s3o8g"),"Target":null,"MaxAcceleration":10.0,"BlendingWeight":5.0)
+]
+
+[node name="Wander" type="Node3D" parent="Separation/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target", "Target")]
+script = ExtResource("5_pbeb2")
+Target = NodePath("@Marker3D@17596")
+Target = NodePath("@Marker3D@17596")
+
+[node name="Seek" type="Node3D" parent="Separation/SteeringController3D/BlendedSteering3D"]
+script = ExtResource("4_s3o8g")
+BlendingWeight = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 10, 0)
+projection = 1
+size = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("5_0lvm6")

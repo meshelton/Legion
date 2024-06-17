@@ -2,7 +2,7 @@
 using Legion.Character.Movement;
 using Legion.Character.Movement.Steering;
 
-namespace Legion.addons.legionai;
+namespace Legion.addons.LegionAI;
 
 public partial class WanderInterface : EditorNode3DGizmoPlugin
 {
@@ -12,7 +12,6 @@ public partial class WanderInterface : EditorNode3DGizmoPlugin
 
     public WanderInterface()
     {
-        GD.Print("Creating gizmo plugin");
         CreateMaterial("main", Colors.Orange);
         CreateHandleMaterial("handles");
     }

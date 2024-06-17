@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 
@@ -92,15 +94,13 @@ public partial class SteeringController3D : Node3D
         {
             return;
         }
-
-        Array<SteeringBehavior3D> movements = this.GetChildrenOfType<SteeringBehavior3D>();
-
-        foreach (SteeringBehavior3D movement in movements)
+        Array<SteeringBehavior3D> behaviors = this.GetChildrenOfType<SteeringBehavior3D>();
+        if (behaviors.Count == 0)
         {
-            SteeringOutput3D steering = movement.GetSteering();
-            Update(steering, MaxSpeed, MaxRotation, (float)delta);
+            return;
         }
-
+        SteeringOutput3D result = behaviors[0].GetSteering();
+        Update(result, MaxSpeed, MaxRotation, (float)delta);
         Character.GlobalPosition = _position;
         Character.SetOrientation(_orientation);
     }
@@ -127,12 +127,27 @@ public partial class SteeringController3D : Node3D
 
     public override string[] _GetConfigurationWarnings()
     {
+        List<String> warnings = new();
+        Array<SteeringBehavior3D> children = this.GetChildrenOfType<SteeringBehavior3D>();
+        switch (children.Count)
+        {
+            case > 1:
+                warnings.Add(
+                    "SteeringController3D should only have 1 behavior attach. "
+                        + "Use a steering behavior combiner if you want multiple behaviors"
+                );
+                break;
+            case 0:
+                warnings.Add("SteeringController3D needs a behavior attached.");
+                break;
+        }
+
         Node parent = GetParent();
         if (parent is not Node3D)
         {
-            return new[] { "SteeringController3D must be attached to a Node3D" };
+            warnings.Add("SteeringController3D must be attached to a Node3D");
         }
 
-        return new string[] { };
+        return warnings.ToArray();
     }
 }
