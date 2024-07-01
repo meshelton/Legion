@@ -24,7 +24,6 @@ public partial class BlendingPlugin : EditorInspectorPlugin
         if (type == Variant.Type.Array && hintString == BlendedSteering3D.HintString)
         {
             AddPropertyEditor(name, new BlendingEditor());
-            GD.Print("Wow did that work?");
             return true;
         }
 

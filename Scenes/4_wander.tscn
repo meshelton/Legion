@@ -6,14 +6,14 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="5_2gk4r"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="8_m0fwo"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fxd8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8oret"]
 albedo_color = Color(0, 1, 0, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_2atr3")
 
 [node name="Wander" parent="." instance=ExtResource("2_2hqsb")]
-material_override = SubResource("StandardMaterial3D_0fxd8")
+material_override = SubResource("StandardMaterial3D_8oret")
 Color = Color(0, 1, 0, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Wander"]

@@ -1,0 +1,193 @@
+[gd_scene load_steps=15 format=3 uid="uid://cx8k4d5bs5v55"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_sonye"]
+[ext_resource type="PackedScene" uid="uid://cvxlj8ahv2ch0" path="res://Objects/Cube.tscn" id="2_tgp5k"]
+[ext_resource type="Script" path="res://Scripts/GlobalHerd.cs" id="2_xin7u"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/SteeringController3D.cs" id="3_fpjvj"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/BlendedSteering3D.cs" id="4_hrc84"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Separation.cs" id="6_4kao2"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/VelocityMatch.cs" id="7_fyr6v"]
+[ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="7_t1kk7"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Arrive.cs" id="8_4c7t7"]
+[ext_resource type="Script" path="res://Character/Movement/Steering/Align.cs" id="9_63ccj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bn6d"]
+albedo_color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcsqk"]
+albedo_color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwn4i"]
+albedo_color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uk1x4"]
+albedo_color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_sonye")
+
+[node name="GlobalHerd" type="Marker3D" parent="."]
+transform = Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0)
+script = ExtResource("2_xin7u")
+Group = &"sheep"
+
+[node name="Sheep" parent="." groups=["sheep"] instance=ExtResource("2_tgp5k")]
+transform = Transform3D(0.634744, 0, 0.772722, 0, 1, 0, -0.772722, 0, 0.634744, 0, 0, 5)
+material_override = SubResource("StandardMaterial3D_0bn6d")
+Color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Sheep"]
+script = ExtResource("3_fpjvj")
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="BlendedSteering3D" type="Node3D" parent="Sheep/SteeringController3D"]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0, 0, 0)
+script = ExtResource("4_hrc84")
+Blending = [Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("6_4kao2"),"MaxAcceleration":10.0,"Threshold":5.0,"DecayCoefficient":1.0,"BlendingWeight":2.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("7_fyr6v"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":10.0,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("8_4c7t7"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":5.0,"MaxSpeed":3.0,"TargetRadius":0.1,"SlowRadius":0.5,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("9_63ccj"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAngularAcceleration":100.0,"MaxRotation":0.523599,"TargetRadius":0.0349066,"SlowRadius":0.349066,"TimeToTarget":0.1,"BlendingWeight":1.0)
+]
+
+[node name="Separation" type="Node3D" parent="Sheep/SteeringController3D/BlendedSteering3D"]
+script = ExtResource("6_4kao2")
+BlendingWeight = 2.0
+
+[node name="VelocityMatch" type="Node3D" parent="Sheep/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("7_fyr6v")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Arrive" type="Node3D" parent="Sheep/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("8_4c7t7")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Align" type="Node3D" parent="Sheep/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("9_63ccj")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Sheep4" parent="." groups=["sheep"] instance=ExtResource("2_tgp5k")]
+transform = Transform3D(0.33007, 0, 0.943957, 0, 1, 0, -0.943957, 0, 0.33007, 0, 0, -5)
+material_override = SubResource("StandardMaterial3D_tcsqk")
+Color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Sheep4"]
+script = ExtResource("3_fpjvj")
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="BlendedSteering3D" type="Node3D" parent="Sheep4/SteeringController3D"]
+script = ExtResource("4_hrc84")
+Blending = [Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("6_4kao2"),"MaxAcceleration":10.0,"Threshold":5.0,"DecayCoefficient":1.0,"BlendingWeight":20.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("7_fyr6v"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":10.0,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("8_4c7t7"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":5.0,"MaxSpeed":3.0,"TargetRadius":0.1,"SlowRadius":0.5,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("9_63ccj"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAngularAcceleration":100.0,"MaxRotation":0.523599,"TargetRadius":0.0349066,"SlowRadius":0.349066,"TimeToTarget":0.1,"BlendingWeight":1.0)
+]
+
+[node name="Separation" type="Node3D" parent="Sheep4/SteeringController3D/BlendedSteering3D"]
+script = ExtResource("6_4kao2")
+BlendingWeight = 20.0
+
+[node name="VelocityMatch" type="Node3D" parent="Sheep4/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("7_fyr6v")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Arrive" type="Node3D" parent="Sheep4/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("8_4c7t7")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Align" type="Node3D" parent="Sheep4/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("9_63ccj")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Sheep2" parent="." groups=["sheep"] instance=ExtResource("2_tgp5k")]
+transform = Transform3D(0.218501, 0, -0.975837, 0, 1, 0, 0.975837, 0, 0.218501, -5, 0, 0)
+material_override = SubResource("StandardMaterial3D_vwn4i")
+Color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Sheep2"]
+script = ExtResource("3_fpjvj")
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="BlendedSteering3D" type="Node3D" parent="Sheep2/SteeringController3D"]
+script = ExtResource("4_hrc84")
+Blending = [Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("6_4kao2"),"MaxAcceleration":10.0,"Threshold":5.0,"DecayCoefficient":1.0,"BlendingWeight":2.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("7_fyr6v"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":10.0,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("8_4c7t7"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":5.0,"MaxSpeed":3.0,"TargetRadius":0.1,"SlowRadius":0.5,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("9_63ccj"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAngularAcceleration":100.0,"MaxRotation":0.523599,"TargetRadius":0.0349066,"SlowRadius":0.349066,"TimeToTarget":0.1,"BlendingWeight":1.0)
+]
+
+[node name="Separation" type="Node3D" parent="Sheep2/SteeringController3D/BlendedSteering3D"]
+script = ExtResource("6_4kao2")
+BlendingWeight = 2.0
+
+[node name="VelocityMatch" type="Node3D" parent="Sheep2/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("7_fyr6v")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Arrive" type="Node3D" parent="Sheep2/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("8_4c7t7")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Align" type="Node3D" parent="Sheep2/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("9_63ccj")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Sheep3" parent="." groups=["sheep"] instance=ExtResource("2_tgp5k")]
+transform = Transform3D(-0.801995, 0, -0.597331, 0, 1, 0, 0.597331, 0, -0.801995, 3.13524, 0, 0)
+material_override = SubResource("StandardMaterial3D_uk1x4")
+Color = Color(0.647059, 0.164706, 0.164706, 1)
+
+[node name="SteeringController3D" type="Node3D" parent="Sheep3"]
+script = ExtResource("3_fpjvj")
+AvoidanceEnabled = true
+AvoidanceLayers = 1
+AvoidanceMask = 1
+
+[node name="BlendedSteering3D" type="Node3D" parent="Sheep3/SteeringController3D"]
+script = ExtResource("4_hrc84")
+Blending = [Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("6_4kao2"),"MaxAcceleration":10.0,"Threshold":5.0,"DecayCoefficient":1.0,"BlendingWeight":2.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("7_fyr6v"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":10.0,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("8_4c7t7"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAcceleration":5.0,"MaxSpeed":3.0,"TargetRadius":0.1,"SlowRadius":0.5,"TimeToTarget":0.1,"BlendingWeight":1.0)
+, Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("9_63ccj"),"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(0.907456, 0, -0.42014, 0, 1, 0, 0.42014, 0, 0.907456, -0.466191, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":ExtResource("2_xin7u"),"Group":&"sheep","Velocity":Vector3(0, 0, 0))
+,"MaxAngularAcceleration":100.0,"MaxRotation":0.523599,"TargetRadius":0.0349066,"SlowRadius":0.349066,"TimeToTarget":0.1,"BlendingWeight":1.0)
+]
+
+[node name="Separation" type="Node3D" parent="Sheep3/SteeringController3D/BlendedSteering3D"]
+script = ExtResource("6_4kao2")
+BlendingWeight = 2.0
+
+[node name="VelocityMatch" type="Node3D" parent="Sheep3/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("7_fyr6v")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Arrive" type="Node3D" parent="Sheep3/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("8_4c7t7")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Align" type="Node3D" parent="Sheep3/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target")]
+script = ExtResource("9_63ccj")
+Target = NodePath("../../../../GlobalHerd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 10, 0)
+projection = 1
+size = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("7_t1kk7")

@@ -6,26 +6,26 @@
 [ext_resource type="Script" path="res://Character/Movement/Steering/Separation.cs" id="4_am385"]
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="5_kccxh"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ogsi5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nn2dt"]
 albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cj1kt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8nv61"]
 albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qy0e8"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jos2l"]
 albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lrfam"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ghxhm"]
 albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_12qu7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_egx6d"]
 albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_1als1")
 
 [node name="Separation" parent="." instance=ExtResource("2_e033n")]
-material_override = SubResource("StandardMaterial3D_ogsi5")
+material_override = SubResource("StandardMaterial3D_nn2dt")
 Color = Color(0.989943, 0.788696, 0.511279, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Separation"]
@@ -41,7 +41,7 @@ DecayCoefficient = 5.0
 
 [node name="Separation2" parent="." instance=ExtResource("2_e033n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.379023, 0, -1.6242)
-material_override = SubResource("StandardMaterial3D_cj1kt")
+material_override = SubResource("StandardMaterial3D_8nv61")
 Color = Color(0.989943, 0.788696, 0.511279, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Separation2"]
@@ -57,7 +57,7 @@ DecayCoefficient = -2.0
 
 [node name="Separation3" parent="." instance=ExtResource("2_e033n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.74457, 0, 0)
-material_override = SubResource("StandardMaterial3D_qy0e8")
+material_override = SubResource("StandardMaterial3D_jos2l")
 Color = Color(0.989943, 0.788696, 0.511279, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Separation3"]
@@ -73,7 +73,7 @@ DecayCoefficient = -2.0
 
 [node name="Separation4" parent="." instance=ExtResource("2_e033n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.75535)
-material_override = SubResource("StandardMaterial3D_lrfam")
+material_override = SubResource("StandardMaterial3D_ghxhm")
 Color = Color(0.989943, 0.788696, 0.511279, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Separation4"]
@@ -89,7 +89,7 @@ DecayCoefficient = -1.0
 
 [node name="Separation5" parent="." instance=ExtResource("2_e033n")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51622, 0, 0)
-material_override = SubResource("StandardMaterial3D_12qu7")
+material_override = SubResource("StandardMaterial3D_egx6d")
 Color = Color(0.989943, 0.788696, 0.511279, 1)
 
 [node name="SteeringController3D" type="Node3D" parent="Separation5"]

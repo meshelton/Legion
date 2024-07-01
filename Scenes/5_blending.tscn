@@ -8,19 +8,20 @@
 [ext_resource type="Environment" uid="uid://dqylvmc5y641g" path="res://main-environment.tres" id="5_0lvm6"]
 [ext_resource type="Script" path="res://Character/Movement/Steering/Wander.cs" id="5_pbeb2"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xciby"]
-albedo_color = Color(0.989943, 0.788696, 0.511279, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lqq3j"]
+albedo_color = Color(0.647059, 0.164706, 0.164706, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_n2pij")
 
-[node name="Separation" parent="." instance=ExtResource("2_2wdng")]
-material_override = SubResource("StandardMaterial3D_xciby")
+[node name="Blended" parent="." instance=ExtResource("2_2wdng")]
+material_override = SubResource("StandardMaterial3D_lqq3j")
+Color = Color(0.647059, 0.164706, 0.164706, 1)
 
-[node name="SteeringController3D" type="Node3D" parent="Separation"]
+[node name="SteeringController3D" type="Node3D" parent="Blended"]
 script = ExtResource("3_e0fex")
 
-[node name="BlendedSteering3D" type="Node3D" parent="Separation/SteeringController3D"]
+[node name="BlendedSteering3D" type="Node3D" parent="Blended/SteeringController3D"]
 script = ExtResource("4_je5fo")
 Blending = [Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("5_pbeb2"),"WanderOffset":3.0,"WanderRadius":1.0,"WanderRate":0.785398,"WanderOrientation":0.0,"MaxAcceleration":2.0,"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":Resource("res://Objects/DebugDelegatedTarget.cs"))
 ,"Target":Object(Marker3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"gizmo_extents":0.25,"script":Resource("res://Objects/DebugDelegatedTarget.cs"))
@@ -28,12 +29,12 @@ Blending = [Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":fal
 , Object(Node3D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","transform":Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0),"rotation_edit_mode":0,"rotation_order":2,"top_level":false,"visible":true,"visibility_parent":NodePath(""),"script":ExtResource("4_s3o8g"),"Target":null,"MaxAcceleration":10.0,"BlendingWeight":5.0)
 ]
 
-[node name="Wander" type="Node3D" parent="Separation/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target", "Target")]
+[node name="Wander" type="Node3D" parent="Blended/SteeringController3D/BlendedSteering3D" node_paths=PackedStringArray("Target", "Target")]
 script = ExtResource("5_pbeb2")
 Target = NodePath("@Marker3D@17596")
 Target = NodePath("@Marker3D@17596")
 
-[node name="Seek" type="Node3D" parent="Separation/SteeringController3D/BlendedSteering3D"]
+[node name="Seek" type="Node3D" parent="Blended/SteeringController3D/BlendedSteering3D"]
 script = ExtResource("4_s3o8g")
 BlendingWeight = 5.0
 
